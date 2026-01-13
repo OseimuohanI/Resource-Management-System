@@ -31,6 +31,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureActions();
         $this->configureViews();
         $this->configureRateLimiting();
+        $this->configureLoginResponse();
     }
 
     /**
@@ -86,6 +87,28 @@ class FortifyServiceProvider extends ServiceProvider
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
+        });
+    }
+
+    /**
+     * Configure login response to include Sanctum token.
+     */
+    private function configureLoginResponse(): void
+    {
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = \App\Models\User::where('email', $request->email)->first();
+            
+            if ($user && \Hash::check($request->password, $user->password)) {
+                // Create a Sanctum token
+                $token = $user->createToken('web-token')->plainTextToken;
+                
+                // Store token in session to pass to frontend
+                $request->session()->put('sanctum_token', $token);
+                
+                return $user;
+            }
+            
+            return null;
         });
     }
 }

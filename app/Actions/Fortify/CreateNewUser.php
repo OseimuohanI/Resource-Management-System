@@ -30,10 +30,33 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        // $token = User::create([
+        //     'name' => $input['name'],
+        //     'email' => $input['email'],
+        //     'password' => $input['password'],
+        // ])->createToken('myapptoken')->plainTextToken;
+
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => $input['password'],
+            // 'role' => 'admin'
+            // 'remember_token' => $this->createToken('myapptoken')->plainTextToken
         ]);
+
+        $token = $user->createToken('myapptoken')->plainTextToken;
+
+        $user->remember_token = $token;
+        $user->save();
+
+        return $user;
+
+        $response = [
+            'user' => $user
+        ];
+
+
+        return response($response, 201);
+
     }
 }

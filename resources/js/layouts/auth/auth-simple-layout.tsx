@@ -1,4 +1,3 @@
-import AppLogoIcon from '@/components/app-logo-icon';
 import { home } from '@/routes';
 import { Link } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
@@ -15,28 +14,54 @@ export default function AuthSimpleLayout({
     description,
 }: PropsWithChildren<AuthLayoutProps>) {
     return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
-            <div className="w-full max-w-sm">
-                <div className="flex flex-col gap-8">
-                    <div className="flex flex-col items-center gap-4">
-                        <Link
-                            href={home()}
-                            className="flex flex-col items-center gap-2 font-medium"
-                        >
-                            <div className="mb-1 flex h-9 w-9 items-center justify-center rounded-md">
-                                <AppLogoIcon className="size-9 fill-current text-[var(--foreground)] dark:text-white" />
-                            </div>
-                            <span className="sr-only">{title}</span>
-                        </Link>
+        <div className="flex min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            {/* Left Side - Branding */}
+            <div className="hidden w-1/2 bg-blue-600 p-12 lg:flex lg:flex-col lg:justify-between">
+                <Link href={home()} className="flex items-center gap-2">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-blue-600">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                        </svg>
+                    </div>
+                    <span className="text-2xl font-bold text-white">ResourceMS</span>
+                </Link>
+                
+                <div className="space-y-6">
+                    <h2 className="text-4xl font-bold leading-tight text-white">
+                        Manage your resources efficiently
+                    </h2>
+                    <p className="text-lg text-blue-100">
+                        Track, allocate, and optimize your organization's resources with real-time insights and comprehensive analytics.
+                    </p>
+                </div>
 
-                        <div className="space-y-2 text-center">
-                            <h1 className="text-xl font-medium">{title}</h1>
-                            <p className="text-center text-sm text-muted-foreground">
+                <div className="text-sm text-blue-100">
+                    © 2026 ResourceMS. All rights reserved.
+                </div>
+            </div>
+
+            {/* Right Side - Form */}
+            <div className="flex w-full items-center justify-center p-8 lg:w-1/2">
+                <div className="w-full max-w-md">
+                    {/* Mobile Logo */}
+                    <Link href={home()} className="mb-8 flex items-center justify-center gap-2 lg:hidden">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-white">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                            </svg>
+                        </div>
+                        <span className="text-xl font-bold text-slate-900 dark:text-white">ResourceMS</span>
+                    </Link>
+
+                    <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                        <div className="mb-8 space-y-2">
+                            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{title}</h1>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
                                 {description}
                             </p>
                         </div>
+                        {children}
                     </div>
-                    {children}
                 </div>
             </div>
         </div>
