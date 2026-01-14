@@ -24,6 +24,7 @@ export function useResources(initialFilters?: ResourceFilters) {
 
     useEffect(() => {
         fetchResources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const createResource = async (data: CreateResourceData) => {

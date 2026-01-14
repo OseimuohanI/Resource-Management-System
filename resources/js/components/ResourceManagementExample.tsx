@@ -4,14 +4,14 @@ import { Button } from '@/components/ui/button';
 
 export default function ResourceManagementExample() {
     const { user, canCreate, canEdit, canDelete } = useAuth();
-    const { resources, deleteResource, loading } = useResources();
+    const { resources, deleteResource } = useResources();
 
     const handleDelete = async (id: number) => {
         if (confirm('Are you sure you want to delete this resource?')) {
             try {
                 await deleteResource(id);
                 alert('Resource deleted successfully');
-            } catch (err) {
+            } catch {
                 alert('Failed to delete resource');
             }
         }

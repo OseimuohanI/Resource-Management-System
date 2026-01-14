@@ -27,6 +27,7 @@ interface DashboardProps {
     adminCount?: number;
     managerCount?: number;
     userCount?: number;
+    [key: string]: unknown;
 }
 
 export default function Dashboard() {

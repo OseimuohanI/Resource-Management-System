@@ -28,7 +28,7 @@ export default function ResourceFormExample() {
                 status: '',
                 quantity: 0,
             });
-        } catch (err) {
+        } catch {
             // Error is already handled by the hook
         }
     };
