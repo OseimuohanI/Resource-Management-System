@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -24,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'company_id',
         'remember_token',
     ];
 
@@ -72,5 +74,51 @@ class User extends Authenticatable
     public function hasRole(string $role): bool
     {
         return $this->role === $role;
+    }
+
+    /**
+     * Get the user's company.
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Get the user's subscription (via company).
+     */
+    public function subscription()
+    {
+        return $this->company ? $this->company->subscription() : null;
+    }
+
+    /**
+     * Check if user can access resources
+     */
+    public function canAccessResources(): bool
+    {
+        if ($this->isAdmin()) {
+            return true;
+        }
+
+        if (!$this->company) {
+            return false;
+        }
+
+        $subscription = $this->company->subscription;
+        
+        if (!$subscription) {
+            return false;
+        }
+
+        return $subscription->canAccessResources();
+    }
+
+    /**
+     * Get user's current subscription plan
+     */
+    public function getCurrentPlan(): string
+    {
+        return $this->subscription()?->plan ?? 'free';
     }
 }

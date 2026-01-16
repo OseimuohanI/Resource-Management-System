@@ -5,6 +5,8 @@ import { Head, usePage, Link } from '@inertiajs/react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import type { Resource } from '@/types/resource';
+import { AnimatedSection } from '@/components/AnimatedSection';
+import { Badge } from '@/components/ui/badge';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -38,6 +40,7 @@ export default function Dashboard() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="space-y-6 p-6">
+                <AnimatedSection className="fade-in-up">
                 <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Dashboard</h1>
@@ -45,13 +48,13 @@ export default function Dashboard() {
                             Welcome back, {user?.name}
                         </p>
                     </div>
-                    <div className="rounded-lg bg-blue-100 px-4 py-2 dark:bg-blue-900">
-                        <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
-                            Role: {user?.role?.toUpperCase()}
-                        </span>
-                    </div>
+                    <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
+                        Role: {user?.role?.toUpperCase()}
+                    </Badge>
                 </div>
+                </AnimatedSection>
 
+                <AnimatedSection delay={100}>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
                         <div className="flex items-center justify-between">
@@ -109,10 +112,22 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
+                </AnimatedSection>
 
                 {isAdmin && totalUsers !== undefined && (
                     <div className="rounded-xl border border-slate-200 bg-gradient-to-r from-blue-50 to-purple-50 p-6 shadow-sm dark:border-slate-700 dark:from-blue-900/20 dark:to-purple-900/20">
-                        <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">User Management</h2>
+                        <div className="mb-4 flex items-center justify-between">
+                            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">User Management</h2>
+                            <Link href="/team">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-400 dark:text-blue-200 dark:hover:bg-blue-900/40"
+                                >
+                                    Manage Team
+                                </Button>
+                            </Link>
+                        </div>
                         <div className="grid gap-4 md:grid-cols-4">
                             <div className="rounded-lg bg-white p-4 dark:bg-slate-800">
                                 <p className="text-sm text-slate-600 dark:text-slate-400">Total Users</p>

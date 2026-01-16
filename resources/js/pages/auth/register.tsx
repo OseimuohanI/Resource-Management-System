@@ -1,6 +1,7 @@
 import { login } from '@/routes';
 import { store } from '@/routes/register';
 import { Form, Head } from '@inertiajs/react';
+import { useState } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -8,9 +9,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import PricingSelection from '@/components/PricingSelection';
 import AuthLayout from '@/layouts/auth-layout';
 
 export default function Register() {
+    const [selectedPlan, setSelectedPlan] = useState('free');
+
     return (
         <AuthLayout
             title="Create an account"
@@ -45,12 +49,25 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
+                                <Label htmlFor="company_name">Company name</Label>
+                                <Input
+                                    id="company_name"
+                                    type="text"
+                                    tabIndex={2}
+                                    autoComplete="organization"
+                                    name="company_name"
+                                    placeholder="Your company"
+                                />
+                                <InputError message={errors.company_name} />
+                            </div>
+
+                            <div className="grid gap-2">
                                 <Label htmlFor="email">Email address</Label>
                                 <Input
                                     id="email"
                                     type="email"
                                     required
-                                    tabIndex={2}
+                                    tabIndex={3}
                                     autoComplete="email"
                                     name="email"
                                     placeholder="email@example.com"
@@ -64,7 +81,7 @@ export default function Register() {
                                     id="password"
                                     type="password"
                                     required
-                                    tabIndex={3}
+                                    tabIndex={4}
                                     autoComplete="new-password"
                                     name="password"
                                     placeholder="Password"
@@ -80,7 +97,7 @@ export default function Register() {
                                     id="password_confirmation"
                                     type="password"
                                     required
-                                    tabIndex={4}
+                                    tabIndex={5}
                                     autoComplete="new-password"
                                     name="password_confirmation"
                                     placeholder="Confirm password"
@@ -90,10 +107,23 @@ export default function Register() {
                                 />
                             </div>
 
+                            {/* Hidden input for plan */}
+                            <input type="hidden" name="plan" value={selectedPlan} />
+
+                            {/* Pricing Selection */}
+                            <div className="my-4">
+                                <PricingSelection
+                                    selectedPlan={selectedPlan}
+                                    onSelectPlan={(plan) => {
+                                        setSelectedPlan(plan);
+                                    }}
+                                />
+                            </div>
+
                             <Button
                                 type="submit"
                                 className="mt-2 w-full bg-blue-600 hover:bg-blue-700"
-                                tabIndex={5}
+                                tabIndex={6}
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner />}
@@ -103,7 +133,7 @@ export default function Register() {
 
                         <div className="text-center text-sm text-slate-600 dark:text-slate-400">
                             Already have an account?{' '}
-                            <TextLink href={login()} tabIndex={6} className="font-medium text-blue-600 hover:text-blue-700">
+                            <TextLink href={login()} tabIndex={7} className="font-medium text-blue-600 hover:text-blue-700">
                                 Log in
                             </TextLink>
                         </div>

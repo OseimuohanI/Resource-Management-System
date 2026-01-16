@@ -1,6 +1,6 @@
 # Resource Management API - Frontend Integration Guide
 
-## Backend Implementation ✅
+## Backend Implementation |-|
 
 The backend is fully implemented with:
 

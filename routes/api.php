@@ -20,6 +20,9 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     
+    Route::get('/company/users', [AuthController::class, 'listCompanyUsers'])->middleware('role:manager,admin');
+    Route::post('/company/users', [AuthController::class, 'registerCompanyUser'])->middleware('role:manager,admin');
+    
     Route::post('/resources', [ResourceController::class, 'store'])->middleware('role:manager,admin');
     Route::put('/resources/{id}', [ResourceController::class, 'update'])->middleware('role:manager,admin');
     Route::patch('/resources/{id}', [ResourceController::class, 'update'])->middleware('role:manager,admin');

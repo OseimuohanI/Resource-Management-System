@@ -11,7 +11,17 @@ class ResourceController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Resource::query();
+        $user = $request->user();
+        
+        if (!$user->company_id) {
+            return response()->json([
+                'success' => false,
+                'data' => [],
+                'message' => 'User does not belong to a company.'
+            ]);
+        }
+
+        $query = Resource::where('company_id', $user->company_id);
 
         if ($request->has('status')) {
             $query->where('status', $request->status);
@@ -37,15 +47,33 @@ class ResourceController extends Controller
 
     public function store(Request $request)
     {
+        $user = $request->user();
+        if (!$user->company_id) {
+            return response()->json(['message' => 'User must belong to a company'], 403);
+        }
+
+        // Check resource limits
+        $subscription = $user->company->subscription;
+        if ($subscription) {
+            $limit = $subscription->getResourceLimit();
+            $currentCount = $user->company->resources()->count();
+            
+            if ($currentCount >= $limit) {
+                return response()->json([
+                    'message' => "Resource limit reached for your {$subscription->plan} plan. Please upgrade to add more resources."
+                ], 403);
+            }
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'nullable|string|max:255',
             'status' => 'nullable|string|max:255',
             'quantity' => 'nullable|integer|min:0',
-            'resourceid' => 'nullable|exists:managers,id',
         ]);
 
         $validated['slug'] = Str::slug($validated['name']);
+        $validated['company_id'] = $user->company_id;
 
         $originalSlug = $validated['slug'];
         $count = 1;
@@ -63,9 +91,10 @@ class ResourceController extends Controller
         ], 201);
     }
 
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        $resource = Resource::find($id);
+        $user = $request->user();
+        $resource = Resource::where('company_id', $user->company_id)->find($id);
 
         if (!$resource) {
             return response()->json([
@@ -82,7 +111,8 @@ class ResourceController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $resource = Resource::find($id);
+        $user = $request->user();
+        $resource = Resource::where('company_id', $user->company_id)->find($id);
 
         if (!$resource) {
             return response()->json([
@@ -96,7 +126,6 @@ class ResourceController extends Controller
             'type' => 'nullable|string|max:255',
             'status' => 'nullable|string|max:255',
             'quantity' => 'nullable|integer|min:0',
-            'resourceid' => 'nullable|exists:managers,id',
         ]);
 
         if (isset($validated['name']) && $validated['name'] !== $resource->name) {
@@ -119,9 +148,10 @@ class ResourceController extends Controller
         ]);
     }
 
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        $resource = Resource::find($id);
+        $user = $request->user();
+        $resource = Resource::where('company_id', $user->company_id)->find($id);
 
         if (!$resource) {
             return response()->json([

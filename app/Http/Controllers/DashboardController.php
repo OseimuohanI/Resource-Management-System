@@ -12,22 +12,25 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        
+        $companyId = $user->company_id;
+
         $stats = [
-            'totalResources' => Resource::count(),
-            'availableResources' => Resource::where('status', 'Available')->count(),
-            'inUseResources' => Resource::where('status', 'In Use')->count(),
-            'maintenanceResources' => Resource::where('status', 'Maintenance')->count(),
+            'totalResources' => Resource::where('company_id', $companyId)->count(),
+            'availableResources' => Resource::where('company_id', $companyId)->where('status', 'Available')->count(),
+            'inUseResources' => Resource::where('company_id', $companyId)->where('status', 'In Use')->count(),
+            'maintenanceResources' => Resource::where('company_id', $companyId)->where('status', 'Maintenance')->count(),
         ];
 
-        $recentResources = Resource::orderBy('created_at', 'desc')->take(5)->get();
+        $recentResources = Resource::where('company_id', $companyId)->orderBy('created_at', 'desc')->take(5)->get();
 
         $resourcesByType = Resource::selectRaw('type, COUNT(*) as count')
+            ->where('company_id', $companyId)
             ->groupBy('type')
             ->get()
             ->pluck('count', 'type');
 
         $resourcesByStatus = Resource::selectRaw('status, COUNT(*) as count')
+            ->where('company_id', $companyId)
             ->groupBy('status')
             ->get()
             ->pluck('count', 'status');
@@ -40,10 +43,10 @@ class DashboardController extends Controller
         ];
 
         if ($user->isAdmin()) {
-            $data['totalUsers'] = User::count();
-            $data['adminCount'] = User::where('role', 'admin')->count();
-            $data['managerCount'] = User::where('role', 'manager')->count();
-            $data['userCount'] = User::where('role', 'user')->count();
+            $data['totalUsers'] = User::where('company_id', $companyId)->count();
+            $data['adminCount'] = User::where('company_id', $companyId)->where('role', 'admin')->count();
+            $data['managerCount'] = User::where('company_id', $companyId)->where('role', 'manager')->count();
+            $data['userCount'] = User::where('company_id', $companyId)->where('role', 'user')->count();
         }
 
         return Inertia::render('dashboard', $data);

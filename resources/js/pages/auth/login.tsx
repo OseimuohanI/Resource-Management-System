@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
+import { AnimatedSection } from '@/components/AnimatedSection';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
@@ -36,6 +37,7 @@ export default function Login({
             >
                 {({ processing, errors }) => (
                     <>
+                        <AnimatedSection className="fade-in-up">
                         <div className="grid gap-6">
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email address</Label>
@@ -57,7 +59,7 @@ export default function Login({
                                     <Label htmlFor="password">Password</Label>
                                     {canResetPassword && (
                                         <TextLink
-                                            href={request()}
+                                            href={request().url}
                                             className="ml-auto text-sm"
                                             tabIndex={5}
                                         >
@@ -101,11 +103,12 @@ export default function Login({
                         {canRegister && (
                             <div className="text-center text-sm text-slate-600 dark:text-slate-400">
                                 Don't have an account?{' '}
-                                <TextLink href={register()} tabIndex={5} className="font-medium text-blue-600 hover:text-blue-700">
+                                <TextLink href={register().url} tabIndex={5} className="font-medium text-blue-600 hover:text-blue-700">
                                     Sign up
                                 </TextLink>
                             </div>
                         )}
+                        </AnimatedSection>
                     </>
                 )}
             </Form>

@@ -3,6 +3,10 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\Company;
+use App\Models\Subscription;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -20,6 +24,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'company_name' => ['nullable', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -28,35 +33,51 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'plan' => ['nullable', 'string', 'in:free,professional,enterprise'],
         ])->validate();
 
-        // $token = User::create([
-        //     'name' => $input['name'],
-        //     'email' => $input['email'],
-        //     'password' => $input['password'],
-        // ])->createToken('myapptoken')->plainTextToken;
+        return DB::transaction(function () use ($input) {
+            $plan = $input['plan'] ?? 'free';
 
-        $user = User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => $input['password'],
-            // 'role' => 'admin'
-            // 'remember_token' => $this->createToken('myapptoken')->plainTextToken
-        ]);
+            $companyName = $input['company_name'] ?? ($input['name'] . "'s Company");
+            $baseSlug = Str::slug($companyName);
+            $slug = $baseSlug;
+            $count = 1;
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+            while (Company::where('slug', $slug)->exists()) {
+                $slug = $baseSlug . '-' . $count;
+                $count++;
+            }
 
-        $user->remember_token = $token;
-        $user->save();
+            $company = Company::create([
+                'name' => $companyName,
+                'slug' => $slug,
+            ]);
 
-        return $user;
+            $user = User::create([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'password' => $input['password'],
+                'company_id' => $company->id,
+                'role' => 'manager',
+            ]);
 
-        $response = [
-            'user' => $user
-        ];
+            $company->update(['owner_id' => $user->id]);
 
+            Subscription::create([
+                'company_id' => $company->id,
+                'user_id' => $user->id,
+                'plan' => $plan,
+                'status' => 'active',
+                'trial_ends_at' => now()->addDays(14),
+            ]);
 
-        return response($response, 201);
+            $token = $user->createToken('myapptoken')->plainTextToken;
 
+            $user->remember_token = $token;
+            $user->save();
+
+            return $user;
+        });
     }
 }

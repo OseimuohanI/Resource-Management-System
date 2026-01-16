@@ -3,6 +3,7 @@ import { type BreadcrumbItem } from '@/types';
 import { type ReactNode, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { setAuthToken } from '@/lib/api';
+import { animationStyles } from '@/components/AnimatedSection';
 
 interface AppLayoutProps {
     children: ReactNode;
@@ -23,8 +24,11 @@ export default ({ children, breadcrumbs, ...props }: AppLayoutProps) => {
     }, [sanctum_token, remember_token]);
     
     return (
-        <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
-            {children}
-        </AppLayoutTemplate>
+        <>
+            <style>{animationStyles}</style>
+            <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
+                {children}
+            </AppLayoutTemplate>
+        </>
     );
 };
