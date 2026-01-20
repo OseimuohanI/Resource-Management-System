@@ -12,16 +12,27 @@ class ResourceController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        
-        if (!$user->company_id) {
+        if (!$user) {
             return response()->json([
                 'success' => false,
                 'data' => [],
-                'message' => 'User does not belong to a company.'
-            ]);
+                'message' => 'Unauthenticated',
+            ], 401);
         }
 
-        $query = Resource::where('company_id', $user->company_id);
+        $query = $user->isAdmin()
+            ? Resource::query()
+            : ($user->company_id
+                ? Resource::where('company_id', $user->company_id)
+                : null);
+
+        if (!$query) {
+            return response()->json([
+                'success' => false,
+                'data' => [],
+                'message' => 'User does not belong to a company.',
+            ], 403);
+        }
 
         if ($request->has('status')) {
             $query->where('status', $request->status);
@@ -94,7 +105,16 @@ class ResourceController extends Controller
     public function show(Request $request, string $id)
     {
         $user = $request->user();
-        $resource = Resource::where('company_id', $user->company_id)->find($id);
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthenticated',
+            ], 401);
+        }
+
+        $resource = $user->isAdmin()
+            ? Resource::find($id)
+            : Resource::where('company_id', $user->company_id)->find($id);
 
         if (!$resource) {
             return response()->json([

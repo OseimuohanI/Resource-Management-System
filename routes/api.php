@@ -10,9 +10,11 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-//Public Routes
-Route::get('/resources', [ResourceController::class, 'index']);//->middleware('role:user,manager,admin');
-Route::get('/resources/{id}', [ResourceController::class, 'show']);//->middleware('role:user,manager,admin');
+// Protected resource routes (require Sanctum auth)
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/resources', [ResourceController::class, 'index']);
+    Route::get('/resources/{id}', [ResourceController::class, 'show']);
+});
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
