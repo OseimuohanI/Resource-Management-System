@@ -11,7 +11,7 @@ export function Footer() {
                     {/* Brand */}
                     <div>
                         <div className="flex items-center gap-2">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-white">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                                 </svg>
@@ -28,24 +28,24 @@ export function Footer() {
                         <h4 className="font-semibold text-slate-900 dark:text-white">Product</h4>
                         <ul className="mt-4 space-y-2">
                             <li>
-                                <Link href="/pricing" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/pricing" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Pricing
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/faq" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/faq" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     FAQ
                                 </Link>
                             </li>
                             <li>
-                                <a href="#features" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/features" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Features
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#security" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/security" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Security
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -55,22 +55,22 @@ export function Footer() {
                         <h4 className="font-semibold text-slate-900 dark:text-white">Company</h4>
                         <ul className="mt-4 space-y-2">
                             <li>
-                                <Link href="/about" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/about" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     About
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/blog" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/blog" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Blog
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/careers" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/careers" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Careers
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/contact" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/contact" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Contact
                                 </Link>
                             </li>
@@ -82,22 +82,22 @@ export function Footer() {
                         <h4 className="font-semibold text-slate-900 dark:text-white">Legal</h4>
                         <ul className="mt-4 space-y-2">
                             <li>
-                                <Link href="/privacy" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/privacy" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Privacy Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/terms" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/terms" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Terms of Service
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/cookies" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/cookies" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Cookie Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/sitemap" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
+                                <Link href="/sitemap" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
                                     Sitemap
                                 </Link>
                             </li>
@@ -117,28 +117,28 @@ export function Footer() {
                         <div className="flex gap-4">
                             <a
                                 href="mailto:info@resourcems.com"
-                                className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+                                className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
                                 aria-label="Email"
                             >
                                 <Mail className="h-5 w-5" />
                             </a>
                             <a
                                 href="#twitter"
-                                className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+                                className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
                                 aria-label="Twitter"
                             >
                                 <Twitter className="h-5 w-5" />
                             </a>
                             <a
                                 href="#github"
-                                className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+                                className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
                                 aria-label="GitHub"
                             >
                                 <Github className="h-5 w-5" />
                             </a>
                             <a
                                 href="#linkedin"
-                                className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+                                className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
                                 aria-label="LinkedIn"
                             >
                                 <Linkedin className="h-5 w-5" />
@@ -146,7 +146,7 @@ export function Footer() {
                         </div>
                     </div>
                     <div className="text-sm text-slate-600 dark:text-slate-400">
-                        <a href="mailto:info@resourcems.com" className="hover:text-blue-600 dark:hover:text-blue-400">
+                        <a href="mailto:info@resourcems.com" className="hover:text-green-600 dark:hover:text-green-400">
                             info@resourcems.com
                         </a>
                     </div>

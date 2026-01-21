@@ -21,6 +21,14 @@ Route::get('faq', function () {
     return Inertia::render('faq');
 })->name('faq');
 
+Route::get('features', function () {
+    return Inertia::render('features');
+})->name('features');
+
+Route::get('security', function () {
+    return Inertia::render('security');
+})->name('security');
+
 Route::get('about', function () {
     return Inertia::render('about');
 })->name('about');
@@ -62,7 +70,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('team/index');
     })->name('team.index');
     Route::get('company/users', [AuthController::class, 'listCompanyUsers'])
-        ->middleware('role:manager,admin')
         ->name('company.users');
 });
 

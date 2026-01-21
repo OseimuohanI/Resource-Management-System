@@ -105,7 +105,7 @@ export default function ResourceFormExample() {
             <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-green-600 hover:bg-green-700"
             >
                 {loading ? 'Creating...' : 'Create Resource'}
             </Button>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -8,6 +8,8 @@ import { Label } from '@/components/ui/label';
 import { useResources } from '@/hooks/useResources';
 import { useAuth } from '@/hooks/useAuth';
 import type { Resource, CreateResourceData, UpdateResourceData } from '@/types/resource';
+import { api } from '@/lib/api';
+import { Search } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -17,25 +19,60 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Resources() {
-    const { resources, loading, error, createResource, updateResource, deleteResource } = useResources();
+    const { resources, loading, error, createResource, updateResource, deleteResource, fetchResources } = useResources();
     const { canEdit, canDelete } = useAuth();
-    
-    console.log('Resources page rendering');
-    console.log('Resources page - canEdit:', canEdit, 'canDelete:', canDelete);
-    console.log('Resources:', resources);
-    console.log('Loading:', loading);
-    console.log('Error:', error);
     
     const [showForm, setShowForm] = useState(false);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [formError, setFormError] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         type: '',
         status: 'Available',
         quantity: 0,
     });
+
+    const [checkInModal, setCheckInModal] = useState<{ isOpen: boolean; resourceId: number | null }>({ isOpen: false, resourceId: null });
+    const [checkOutModal, setCheckOutModal] = useState<{ isOpen: boolean; resourceId: number | null }>({ isOpen: false, resourceId: null });
+    const [usageNotes, setUsageNotes] = useState('');
+
+    // Debounced search effect
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            fetchResources({ search: searchQuery });
+        }, 300);
+
+        return () => clearTimeout(timer);
+    }, [searchQuery]);
+
+    const handleCheckIn = async () => {
+        if (!checkInModal.resourceId) return;
+        try {
+            await api.post(`/resources/${checkInModal.resourceId}/checkin`);
+            setSuccessMessage('Resource checked in successfully');
+            setCheckInModal({ isOpen: false, resourceId: null });
+            fetchResources();
+            setTimeout(() => setSuccessMessage(null), 3000);
+        } catch (err) {
+            setFormError('Failed to check in resource');
+        }
+    };
+
+    const handleCheckOut = async () => {
+        if (!checkOutModal.resourceId) return;
+        try {
+            await api.post(`/resources/${checkOutModal.resourceId}/checkout`, { notes: usageNotes });
+            setSuccessMessage('Resource checked out successfully');
+            setCheckOutModal({ isOpen: false, resourceId: null });
+            setUsageNotes('');
+            fetchResources();
+            setTimeout(() => setSuccessMessage(null), 3000);
+        } catch (err) {
+            setFormError('Failed to check out resource');
+        }
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -111,11 +148,23 @@ export default function Resources() {
                     {canEdit && (
                         <Button
                             onClick={() => setShowForm(true)}
-                            className="bg-blue-600 hover:bg-blue-700"
+                            className="bg-green-600 hover:bg-green-700"
                         >
                             Add Resource
                         </Button>
                     )}
+                </div>
+
+                {/* Search Bar */}
+                <div className="relative">
+                    <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+                    <Input
+                        type="text"
+                        placeholder="Search resources..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-10"
+                    />
                 </div>
 
                 {successMessage && (
@@ -163,7 +212,7 @@ export default function Resources() {
 
                                 <div>
                                     <Label htmlFor="status">Status</Label>
-                                    <select title='status' id="status" name="status" value={formData.status} onChange={handleChange} className="flex h-9 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
+                                    <select title='status' id="status" name="status" value={formData.status} onChange={handleChange} className="flex h-9 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
                                         <option value="Available">Available</option>
                                         <option value="In Use">In Use</option>
                                         <option value="Maintenance">Maintenance</option>
@@ -188,7 +237,7 @@ export default function Resources() {
                                 <Button
                                     type="submit"
                                     disabled={loading}
-                                    className="bg-blue-600 hover:bg-blue-700"
+                                    className="bg-green-600 hover:bg-green-700"
                                 >
                                     {loading ? 'Saving...' : editingId ? 'Update Resource' : 'Create Resource'}
                                 </Button>
@@ -253,9 +302,25 @@ export default function Resources() {
                                                 {canEdit && (
                                                     <Button
                                                         onClick={() => handleEdit(resource)}
-                                                        className="bg-blue-600 px-3 py-1 text-xs hover:bg-blue-700"
+                                                        className="bg-green-600 px-3 py-1 text-xs hover:bg-green-700"
                                                     >
                                                         Edit
+                                                    </Button>
+                                                )}
+                                                {resource.status === 'Available' && (
+                                                    <Button
+                                                        onClick={() => setCheckOutModal({ isOpen: true, resourceId: resource.id })}
+                                                        className="bg-blue-600 px-3 py-1 text-xs hover:bg-blue-700"
+                                                    >
+                                                        Check Out
+                                                    </Button>
+                                                )}
+                                                {resource.status === 'In Use' && (
+                                                    <Button
+                                                        onClick={() => setCheckInModal({ isOpen: true, resourceId: resource.id })}
+                                                        className="bg-orange-600 px-3 py-1 text-xs hover:bg-orange-700"
+                                                    >
+                                                        Check In
                                                     </Button>
                                                 )}
                                                 {canDelete && (

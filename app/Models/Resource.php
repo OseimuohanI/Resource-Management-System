@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Resource extends Model
 {
@@ -21,5 +22,10 @@ class Resource extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function usageHistory(): HasMany
+    {
+        return $this->hasMany(ResourceUsage::class)->latest();
     }
 }

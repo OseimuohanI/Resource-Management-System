@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react';
 import { Head } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Footer } from '@/components/Footer';
 import { PublicHeader } from '@/components/PublicHeader';
 
@@ -132,24 +132,52 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-b border-slate-200 dark:border-slate-700">
+        <div className="border-b border-slate-100 dark:border-slate-800/50">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex w-full items-center justify-between py-4 text-left hover:bg-slate-50 dark:hover:bg-slate-700/50"
+                className="flex w-full items-center justify-between py-6 text-left transition-colors hover:text-green-600 dark:hover:text-green-400"
             >
                 <span className="font-semibold text-slate-900 dark:text-white">{question}</span>
                 <ChevronDown
-                    className={`h-5 w-5 flex-shrink-0 text-slate-600 transition-transform dark:text-slate-400 ${
+                    className={`h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
                         isOpen ? 'rotate-180' : ''
                     }`}
                 />
             </button>
-            {isOpen && <p className="pb-4 text-slate-600 dark:text-slate-400">{answer}</p>}
+            <div
+                className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen ? 'grid-rows-[1fr] opacity-100 mb-6' : 'grid-rows-[0fr] opacity-0'
+                }`}
+            >
+                <div className="overflow-hidden">
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{answer}</p>
+                </div>
+            </div>
         </div>
     );
 }
 
 export default function FAQ() {
+    useEffect(() => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        animatedElements.forEach(el => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <>
             <Head title="FAQ" />
@@ -203,7 +231,7 @@ export default function FAQ() {
                                 <h2 className="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
                                     {category.title}
                                 </h2>
-                                <div className="rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+                                <div className="space-y-2">
                                     {category.items.map((item, itemIndex) => (
                                         <FAQItem
                                             key={`${categoryIndex}-${itemIndex}`}
@@ -228,7 +256,7 @@ export default function FAQ() {
                         </p>
                         <a
                             href="mailto:info@resourcems.com"
-                            className="mt-8 inline-block rounded-lg bg-blue-600 px-8 py-3 text-white transition hover:bg-blue-700"
+                            className="mt-8 inline-block rounded-lg bg-green-600 px-8 py-3 text-white transition hover:bg-green-700"
                         >
                             Contact Support
                         </a>

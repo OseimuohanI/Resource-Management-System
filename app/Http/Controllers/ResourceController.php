@@ -113,8 +113,8 @@ class ResourceController extends Controller
         }
 
         $resource = $user->isAdmin()
-            ? Resource::find($id)
-            : Resource::where('company_id', $user->company_id)->find($id);
+            ? Resource::with('usageHistory.user')->find($id)
+            : Resource::where('company_id', $user->company_id)->with('usageHistory.user')->find($id);
 
         if (!$resource) {
             return response()->json([
@@ -126,6 +126,73 @@ class ResourceController extends Controller
         return response()->json([
             'success' => true,
             'data' => $resource,
+        ]);
+    }
+
+    public function checkOut(Request $request, string $id)
+    {
+        $user = $request->user();
+        $resource = Resource::where('company_id', $user->company_id)->find($id);
+
+        if (!$resource) {
+            return response()->json(['message' => 'Resource not found'], 404);
+        }
+
+        if ($resource->status === 'In Use') {
+            return response()->json(['message' => 'Resource is already in use'], 400);
+        }
+
+        $validated = $request->validate([
+            'notes' => 'nullable|string|max:1000',
+        ]);
+
+        // Create usage record
+        $resource->usageHistory()->create([
+            'user_id' => $user->id,
+            'checked_out_at' => now(),
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        // Update resource status
+        $resource->update(['status' => 'In Use']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Resource checked out successfully',
+            'data' => $resource->fresh('usageHistory'),
+        ]);
+    }
+
+    public function checkIn(Request $request, string $id)
+    {
+        $user = $request->user();
+        $resource = Resource::where('company_id', $user->company_id)->find($id);
+
+        if (!$resource) {
+            return response()->json(['message' => 'Resource not found'], 404);
+        }
+
+        if ($resource->status !== 'In Use') {
+            return response()->json(['message' => 'Resource is not currently checked out'], 400);
+        }
+
+        // Find active usage record
+        $usage = $resource->usageHistory()
+            ->whereNull('checked_in_at')
+            ->latest()
+            ->first();
+
+        if ($usage) {
+            $usage->update(['checked_in_at' => now()]);
+        }
+
+        // Update resource status
+        $resource->update(['status' => 'Available']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Resource checked in successfully',
+            'data' => $resource->fresh('usageHistory'),
         ]);
     }
 

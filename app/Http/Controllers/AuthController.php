@@ -109,8 +109,15 @@ class AuthController extends Controller
             ], 403);
         }
 
-        $users = $company->users()
-            ->select('id', 'name', 'email', 'role', 'created_at')
+        // Allow all users in the company to view the team list
+        $query = $company->users();
+
+        // Handle trashed filter
+        if ($request->get('trashed') === 'only') {
+            $query->onlyTrashed();
+        }
+
+        $users = $query->select('id', 'name', 'email', 'role', 'created_at', 'deleted_at')
             ->orderBy('created_at')
             ->get();
 
@@ -173,5 +180,67 @@ class AuthController extends Controller
         return response()->json([
             'user' => $newUser,
         ], 201);
+    }
+
+    public function deleteCompanyUser(Request $request, string $id)
+    {
+        $authUser = $request->user();
+        $company = $authUser->company;
+
+        if (!$company) {
+            return response()->json(['message' => 'User must belong to a company.'], 403);
+        }
+
+        $userToDelete = User::where('company_id', $company->id)->find($id);
+
+        if (!$userToDelete) {
+            return response()->json(['message' => 'User not found in your company.'], 404);
+        }
+
+        if ($userToDelete->id === $authUser->id) {
+            return response()->json(['message' => 'You cannot delete yourself.'], 403);
+        }
+
+        $userToDelete->delete();
+
+        return response()->json([
+            'message' => 'Team member removed successfully.',
+        ]);
+    }
+
+    public function restoreCompanyUser(Request $request, string $id)
+    {
+        $authUser = $request->user();
+        $company = $authUser->company;
+
+        if (!$company) return response()->json(['message' => 'User must belong to a company.'], 403);
+
+        $user = User::onlyTrashed()->where('company_id', $company->id)->find($id);
+
+        if (!$user) return response()->json(['message' => 'User not found in trash.'], 404);
+
+        $user->restore();
+
+        return response()->json(['message' => 'User restored successfully.']);
+    }
+
+    public function forceDeleteCompanyUser(Request $request, string $id)
+    {
+        $authUser = $request->user();
+        $company = $authUser->company;
+
+        if (!$company) return response()->json(['message' => 'User must belong to a company.'], 403);
+
+        $user = User::withTrashed()->where('company_id', $company->id)->find($id);
+
+        if (!$user) return response()->json(['message' => 'User not found.'], 404);
+
+        if ($user->id === $authUser->id) {
+            return response()->json(['message' => 'You cannot delete yourself.'], 403);
+        }
+
+        $user->forceDelete();
+
+        return response()->json(['message' => 'User permanently deleted.']);
     }
 }

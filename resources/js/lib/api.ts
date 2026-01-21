@@ -90,6 +90,11 @@ export const resourceApi = {
     },
 };
 
+export const api = axios.create({
+    baseURL: API_BASE,
+    withCredentials: true,
+});
+
 export function handleApiError(error: unknown): string {
     if (axios.isAxiosError(error)) {
         if (error.response?.data?.message) {

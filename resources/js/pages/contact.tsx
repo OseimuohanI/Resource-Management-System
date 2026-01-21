@@ -100,12 +100,12 @@ export default function Contact() {
                                     <a
                                         key={index}
                                         href={method.href}
-                                        className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-6 hover:border-blue-300 hover:shadow-md transition dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-600"
+                                        className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-6 hover:border-green-300 hover:shadow-md transition dark:border-slate-700 dark:bg-slate-800 dark:hover:border-green-600"
                                     >
-                                        <Icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                                        <Icon className="h-8 w-8 text-green-600 dark:text-green-400" />
                                         <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">{method.title}</h3>
                                         <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{method.description}</p>
-                                        <p className="mt-3 font-medium text-blue-600 dark:text-blue-400">{method.contact}</p>
+                                        <p className="mt-3 font-medium text-green-600 dark:text-green-400">{method.contact}</p>
                                     </a>
                                 );
                             })}
@@ -139,7 +139,7 @@ export default function Contact() {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                             placeholder="Your name"
                                         />
                                     </div>
@@ -153,7 +153,7 @@ export default function Contact() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                             placeholder="your@email.com"
                                         />
                                     </div>
@@ -168,7 +168,7 @@ export default function Contact() {
                                         name="company"
                                         value={formData.company}
                                         onChange={handleChange}
-                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                         placeholder="Your company"
                                     />
                                 </div>
@@ -183,7 +183,7 @@ export default function Contact() {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                         placeholder="How can we help?"
                                     />
                                 </div>
@@ -198,14 +198,14 @@ export default function Contact() {
                                         onChange={handleChange}
                                         required
                                         rows={5}
-                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                         placeholder="Tell us more..."
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className="w-full rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+                                    className="w-full rounded-lg bg-green-600 px-6 py-3 font-medium text-white transition hover:bg-green-700"
                                 >
                                     Send Message
                                 </button>

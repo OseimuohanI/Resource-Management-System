@@ -52,14 +52,14 @@ export default function PricingSelection({ selectedPlan, onSelectPlan }: Pricing
                         onClick={() => onSelectPlan(plan.id)}
                         className={`relative rounded-lg border-2 p-6 text-left transition-all ${
                             selectedPlan === plan.id
-                                ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-900/20'
+                                ? 'border-green-500 bg-green-50 dark:border-green-400 dark:bg-green-900/20'
                                 : 'border-slate-200 bg-white hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600'
                         }`}
                     >
                         {plan.highlighted && (
                             <div className="mb-4 flex items-center gap-2">
                                 <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                                <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Most Popular</span>
+                                <span className="text-sm font-medium text-green-600 dark:text-green-400">Most Popular</span>
                             </div>
                         )}
 
@@ -69,7 +69,7 @@ export default function PricingSelection({ selectedPlan, onSelectPlan }: Pricing
                                 <p className="text-sm text-slate-600 dark:text-slate-400">{plan.description}</p>
                             </div>
                             {selectedPlan === plan.id && (
-                                <CheckCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                                <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
                             )}
                         </div>
 
