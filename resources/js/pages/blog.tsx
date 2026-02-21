@@ -120,20 +120,20 @@ export default function Blog() {
                                     className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-8 hover:shadow-lg transition dark:border-slate-700 dark:bg-slate-800"
                                 >
                                     <div className="flex items-start gap-6">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900">
                                             {(() => {
                                                 const Icon = categoryIcon(post.category);
-                                                return <Icon className="h-6 w-6 text-blue-600 dark:text-blue-300" />;
+                                                return <Icon className="h-6 w-6 text-green-600 dark:text-green-300" />;
                                             })()}
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex items-center gap-6 mb-3">
-                                                <span className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900 dark:text-blue-200">
+                                                <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700 dark:bg-green-900 dark:text-green-200">
                                                     {post.category}
                                                 </span>
                                                 <span className="text-sm text-slate-500 dark:text-slate-400">{post.readTime}</span>
                                             </div>
-                                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition">
+                                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white hover:text-green-600 dark:hover:text-green-400 transition">
                                                 {post.title}
                                             </h2>
                                             <p className="mt-3 text-slate-600 dark:text-slate-400">
@@ -149,7 +149,7 @@ export default function Blog() {
                                                     {post.date}
                                                 </div>
                                             </div>
-                                            <button className="mt-6 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition">
+                                            <button className="mt-6 inline-flex items-center gap-2 text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium transition">
                                                 Read More
                                                 <ChevronRight className="h-4 w-4" />
                                             </button>
@@ -164,7 +164,7 @@ export default function Blog() {
                             <button className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">
                                 ← Previous
                             </button>
-                            <button className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+                            <button className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700">
                                 1
                             </button>
                             <button className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700">
@@ -190,11 +190,11 @@ export default function Blog() {
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder-slate-400"
+                                className="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder-slate-400"
                             />
                             <button
                                 type="submit"
-                                className="rounded-lg bg-blue-600 px-6 py-2 font-medium text-white hover:bg-blue-700 transition"
+                                className="rounded-lg bg-green-600 px-6 py-2 font-medium text-white hover:bg-green-700 transition"
                             >
                                 Subscribe
                             </button>

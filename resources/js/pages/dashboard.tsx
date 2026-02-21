@@ -48,7 +48,7 @@ export default function Dashboard() {
                             Welcome back, {user?.name}
                         </p>
                     </div>
-                    <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
+                    <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700 dark:border-green-700 dark:bg-green-900/40 dark:text-green-200">
                         Role: {user?.role?.toUpperCase()}
                     </Badge>
                 </div>
@@ -62,8 +62,8 @@ export default function Dashboard() {
                                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Total Resources</p>
                                 <p className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">{stats.totalResources}</p>
                             </div>
-                            <div className="rounded-lg bg-blue-100 p-3 dark:bg-blue-900">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-blue-600 dark:text-blue-400">
+                            <div className="rounded-lg bg-green-100 p-3 dark:bg-green-900">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-green-600 dark:text-green-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                                 </svg>
                             </div>
@@ -115,14 +115,14 @@ export default function Dashboard() {
                 </AnimatedSection>
 
                 {isAdmin && totalUsers !== undefined && (
-                    <div className="rounded-xl border border-slate-200 bg-gradient-to-r from-blue-50 to-purple-50 p-6 shadow-sm dark:border-slate-700 dark:from-blue-900/20 dark:to-purple-900/20">
+                    <div className="rounded-xl border border-slate-200 bg-gradient-to-r from-green-50 to-purple-50 p-6 shadow-sm dark:border-slate-700 dark:from-green-900/20 dark:to-purple-900/20">
                         <div className="mb-4 flex items-center justify-between">
                             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">User Management</h2>
                             <Link href="/team">
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    className="border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-400 dark:text-blue-200 dark:hover:bg-blue-900/40"
+                                    className="border-green-600 text-green-600 hover:bg-green-50 dark:border-green-400 dark:text-green-200 dark:hover:bg-green-900/40"
                                 >
                                     Manage Team
                                 </Button>
@@ -139,7 +139,7 @@ export default function Dashboard() {
                             </div>
                             <div className="rounded-lg bg-white p-4 dark:bg-slate-800">
                                 <p className="text-sm text-slate-600 dark:text-slate-400">Managers</p>
-                                <p className="mt-1 text-2xl font-bold text-blue-600 dark:text-blue-400">{managerCount}</p>
+                                <p className="mt-1 text-2xl font-bold text-green-600 dark:text-green-400">{managerCount}</p>
                             </div>
                             <div className="rounded-lg bg-white p-4 dark:bg-slate-800">
                                 <p className="text-sm text-slate-600 dark:text-slate-400">Users</p>
@@ -156,7 +156,7 @@ export default function Dashboard() {
                             {Object.entries(resourcesByType).map(([type, count]) => (
                                 <div key={type} className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <div className="h-2 w-2 rounded-full bg-blue-600"></div>
+                                        <div className="h-2 w-2 rounded-full bg-green-600"></div>
                                         <span className="text-sm text-slate-700 dark:text-slate-300">{type || 'Unspecified'}</span>
                                     </div>
                                     <span className="text-sm font-semibold text-slate-900 dark:text-white">{count}</span>
@@ -193,7 +193,7 @@ export default function Dashboard() {
                     <div className="mb-4 flex items-center justify-between">
                         <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Recent Resources</h2>
                         <Link href="/resources">
-                            <Button className="bg-blue-600 hover:bg-blue-700">
+                            <Button className="bg-green-600 hover:bg-green-700">
                                 View All Resources
                             </Button>
                         </Link>

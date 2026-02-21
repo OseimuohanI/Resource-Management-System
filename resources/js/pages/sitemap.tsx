@@ -67,7 +67,7 @@ export default function Sitemap() {
                                             <li key={linkIndex}>
                                                 <Link
                                                     href={link.href}
-                                                    className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition"
+                                                    className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400 transition"
                                                 >
                                                     {link.label}
                                                 </Link>
@@ -87,7 +87,7 @@ export default function Sitemap() {
                             </p>
                             <a
                                 href="/sitemap.xml"
-                                className="mt-4 inline-block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                                className="mt-4 inline-block text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium"
                             >
                                 View XML Sitemap →
                             </a>

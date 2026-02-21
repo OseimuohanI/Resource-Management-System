@@ -22,12 +22,19 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     
-    Route::get('/company/users', [AuthController::class, 'listCompanyUsers'])->middleware('role:manager,admin');
+    Route::get('/company/users', [AuthController::class, 'listCompanyUsers']);
     Route::post('/company/users', [AuthController::class, 'registerCompanyUser'])->middleware('role:manager,admin');
+    Route::delete('/company/users/{id}', [AuthController::class, 'deleteCompanyUser'])->middleware('role:manager,admin');
+    
+    Route::post('/company/users/{id}/restore', [AuthController::class, 'restoreCompanyUser'])->middleware('role:manager,admin');
+    Route::delete('/company/users/{id}/force', [AuthController::class, 'forceDeleteCompanyUser'])->middleware('role:manager,admin');
     
     Route::post('/resources', [ResourceController::class, 'store'])->middleware('role:manager,admin');
     Route::put('/resources/{id}', [ResourceController::class, 'update'])->middleware('role:manager,admin');
     Route::patch('/resources/{id}', [ResourceController::class, 'update'])->middleware('role:manager,admin');
     
+    Route::post('/resources/{id}/checkout', [ResourceController::class, 'checkOut']);
+    Route::post('/resources/{id}/checkin', [ResourceController::class, 'checkIn']);
+
     Route::delete('/resources/{id}', [ResourceController::class, 'destroy'])->middleware('role:admin');
 });

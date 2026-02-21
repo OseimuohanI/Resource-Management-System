@@ -3,7 +3,8 @@ import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useRef, useEffect } from 'react';
 import { Footer } from '@/components/Footer';
-import { CheckCircle, Star } from 'lucide-react';
+import { PricingCard } from '@/components/PricingCard';
+import { PRICING_PLANS } from '@/config/pricing';
 
 export default function Welcome({
     canRegister = true,
@@ -81,7 +82,7 @@ export default function Welcome({
                 <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/80">
                     <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
                         <div className="flex items-center gap-2">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-white">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                                 </svg>
@@ -92,7 +93,7 @@ export default function Welcome({
                             {auth.user ? (
                                 <Link
                                     href={dashboard().url}
-                                    className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                                    className="rounded-lg bg-green-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-green-700"
                                 >
                                     Dashboard
                                 </Link>
@@ -107,7 +108,7 @@ export default function Welcome({
                                     {canRegister && (
                                         <Link
                                             href={register().url}
-                                            className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                                            className="rounded-lg bg-green-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-green-700"
                                         >
                                             Register
                                         </Link>
@@ -123,7 +124,7 @@ export default function Welcome({
                     <div className="text-center">
                         <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-white fade-in-up">
                             Streamline Your
-                            <span className="block text-blue-600">Resource Management</span>
+                            <span className="block text-green-600">Resource Management</span>
                         </h1>
                         <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300 fade-in-up stagger-1">
                             Efficiently track, allocate, and manage your organization's resources with our comprehensive management system. 
@@ -134,7 +135,7 @@ export default function Welcome({
                                 <>
                                     <Link
                                         href={register().url}
-                                        className="rounded-lg bg-blue-600 px-8 py-3 text-base font-medium text-white transition hover:bg-blue-700"
+                                        className="rounded-lg bg-green-600 px-8 py-3 text-base font-medium text-white transition hover:bg-green-700"
                                     >
                                         Get Started
                                     </Link>
@@ -152,8 +153,8 @@ export default function Welcome({
                     {/* Features Grid */}
                     <div className="mt-24 grid gap-8 md:grid-cols-3">
                         <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-700 dark:bg-slate-800 animate-on-scroll">
-                            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-blue-600 dark:text-blue-400">
+                            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-green-600 dark:text-green-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
                                 </svg>
                             </div>
@@ -193,10 +194,10 @@ export default function Welcome({
                 {/* About Section with Parallax */}
                 <div
                     ref={aboutSectionRef}
-                    className="relative bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 overflow-hidden"
+                    className="relative bg-gradient-to-br from-green-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 overflow-hidden"
                 >
                     {/* Background decorative elements */}
-                    <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
+                    <div className="absolute top-0 left-0 w-96 h-96 bg-green-200 dark:bg-green-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
                     <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-200 dark:bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
 
                     <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
@@ -211,7 +212,7 @@ export default function Welcome({
                                 </p>
                                 <ul className="space-y-4">
                                     <li className="flex items-start gap-3">
-                                        <div className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-md bg-blue-600 text-white">
+                                        <div className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-md bg-green-600 text-white">
                                             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                             </svg>
@@ -222,7 +223,7 @@ export default function Welcome({
                                         </div>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <div className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-md bg-blue-600 text-white">
+                                        <div className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-md bg-green-600 text-white">
                                             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                             </svg>
@@ -233,7 +234,7 @@ export default function Welcome({
                                         </div>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <div className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-md bg-blue-600 text-white">
+                                        <div className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-md bg-green-600 text-white">
                                             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                             </svg>
@@ -251,7 +252,7 @@ export default function Welcome({
                                 <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-8">
                                     <div className="grid gap-6">
                                         <div className="text-center">
-                                            <div className="text-5xl font-bold text-blue-600">10K+</div>
+                                            <div className="text-5xl font-bold text-green-600">10K+</div>
                                             <p className="text-slate-600 dark:text-slate-300 mt-2">Active Users</p>
                                         </div>
                                         <div className="text-center">
@@ -277,8 +278,8 @@ export default function Welcome({
                             <p className="text-lg text-slate-600 dark:text-slate-300">Everything you need to manage resources effectively</p>
                         </div>
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                            <div className="p-6 rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 animate-on-scroll">
-                                <div className="h-12 w-12 rounded-lg bg-blue-600 flex items-center justify-center mb-4">
+                            <div className="p-6 rounded-lg bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 animate-on-scroll">
+                                <div className="h-12 w-12 rounded-lg bg-green-600 flex items-center justify-center mb-4">
                                     <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                     </svg>
@@ -329,7 +330,7 @@ export default function Welcome({
                         </div>
                         <div className="grid gap-12 md:grid-cols-3">
                             <div className="text-center animate-on-scroll">
-                                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-white text-2xl font-bold mb-6">1</div>
+                                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-600 text-white text-2xl font-bold mb-6">1</div>
                                 <h4 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Create Your Account</h4>
                                 <p className="text-slate-600 dark:text-slate-300">Sign up in seconds and set up your organization profile. No credit card required for the trial period.</p>
                             </div>
@@ -356,8 +357,8 @@ export default function Welcome({
                         </div>
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                             <div className="p-6 border border-slate-200 dark:border-slate-700 rounded-xl hover:shadow-lg transition-shadow animate-on-scroll">
-                                <div className="h-12 w-12 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
-                                    <svg className="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div className="h-12 w-12 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center mb-4">
+                                    <svg className="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                                     </svg>
                                 </div>
@@ -414,7 +415,7 @@ export default function Welcome({
                 </div>
 
                 {/* Testimonials Section */}
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 border-t border-slate-200 dark:border-slate-700">
+                <div className="bg-gradient-to-br from-green-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 border-t border-slate-200 dark:border-slate-700">
                     <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
                         <div className="text-center mb-16 animate-on-scroll">
                             <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">What Our Clients Say</h3>
@@ -433,7 +434,7 @@ export default function Welcome({
                                 </div>
                                 <p className="text-slate-600 dark:text-slate-300 mb-4">"ResourceMS transformed our equipment management. We've reduced downtime by 40% and improved resource utilization significantly."</p>
                                 <div className="flex items-center">
-                                    <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold">JD</div>
+                                    <div className="h-10 w-10 rounded-full bg-green-600 flex items-center justify-center text-white font-semibold">JD</div>
                                     <div className="ml-3">
                                         <p className="font-semibold text-slate-900 dark:text-white">John Davis</p>
                                         <p className="text-sm text-slate-600 dark:text-slate-400">Operations Manager</p>
@@ -495,87 +496,21 @@ export default function Welcome({
                         </div>
 
                         <div className="grid gap-8 lg:grid-cols-3">
-                            {/* Free Plan */}
-                            <div className="animate-on-scroll rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-                                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Free</h3>
-                                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Perfect for getting started</p>
-                                <div className="mt-6">
-                                    <span className="text-5xl font-bold text-slate-900 dark:text-white">$0</span>
-                                    <span className="text-slate-600 dark:text-slate-400"> Forever free</span>
-                                </div>
-                                <Link
-                                    href={register().url}
-                                    className="mt-8 block w-full rounded-lg border border-slate-300 bg-white py-2 text-center text-slate-900 transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
+                            {PRICING_PLANS.map((plan, index) => (
+                                <div 
+                                    key={plan.slug} 
+                                    className="animate-on-scroll" 
+                                    style={{ transitionDelay: `${index * 100}ms` }}
                                 >
-                                    Get Started
-                                </Link>
-                                <div className="mt-8 space-y-4 border-t border-slate-200 pt-8 dark:border-slate-700">
-                                    {['Up to 50 resources', 'Single user account', 'Basic resource tracking', 'Email support', '7-day history retention'].map((feature) => (
-                                        <div key={feature} className="flex items-start gap-3">
-                                            <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400 mt-0.5" />
-                                            <span className="text-sm text-slate-700 dark:text-slate-300">{feature}</span>
-                                        </div>
-                                    ))}
+                                    <PricingCard plan={plan} />
                                 </div>
-                            </div>
-
-                            {/* Professional Plan - Featured */}
-                            <div className="animate-on-scroll relative rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-white p-8 shadow-2xl dark:from-blue-900/20 dark:to-slate-900">
-                                <div className="mb-4 flex items-center gap-2">
-                                    <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                                    <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Most Popular</span>
-                                </div>
-                                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Professional</h3>
-                                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">For growing teams</p>
-                                <div className="mt-6">
-                                    <span className="text-5xl font-bold text-slate-900 dark:text-white">$29</span>
-                                    <span className="text-slate-600 dark:text-slate-400"> /month</span>
-                                </div>
-                                <Link
-                                    href={register().url}
-                                    className="mt-8 block w-full rounded-lg bg-blue-600 py-2 text-center font-medium text-white transition hover:bg-blue-700"
-                                >
-                                    Start 14-Day Trial
-                                </Link>
-                                <div className="mt-8 space-y-4 border-t border-slate-200 pt-8 dark:border-slate-700">
-                                    {['Up to 500 resources', 'Up to 5 team members', 'Advanced resource tracking', 'Resource analytics & reports', '1-year history retention', 'Priority email support', 'API access', 'Custom resource fields'].map((feature) => (
-                                        <div key={feature} className="flex items-start gap-3">
-                                            <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400 mt-0.5" />
-                                            <span className="text-sm text-slate-700 dark:text-slate-300">{feature}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Enterprise Plan */}
-                            <div className="animate-on-scroll rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-                                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Enterprise</h3>
-                                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">For large organizations</p>
-                                <div className="mt-6">
-                                    <span className="text-5xl font-bold text-slate-900 dark:text-white">$99</span>
-                                    <span className="text-slate-600 dark:text-slate-400"> /month</span>
-                                </div>
-                                <a
-                                    href="mailto:info@resourcems.com"
-                                    className="mt-8 block w-full rounded-lg border border-slate-300 bg-white py-2 text-center text-slate-900 transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
-                                >
-                                    Contact Sales
-                                </a>
-                                <div className="mt-8 space-y-4 border-t border-slate-200 pt-8 dark:border-slate-700">
-                                    {['Unlimited resources', 'Unlimited team members', 'Advanced resource tracking', 'Resource analytics & reports', 'Unlimited history retention', '24/7 phone & email support', 'Advanced API access', 'Custom resource fields', 'Role-based permissions', 'Audit logging', 'Custom integrations', 'Dedicated account manager'].map((feature) => (
-                                        <div key={feature} className="flex items-start gap-3">
-                                            <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400 mt-0.5" />
-                                            <span className="text-sm text-slate-700 dark:text-slate-300">{feature}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            ))}
                         </div>
 
                         <div className="mt-12 text-center">
                             <p className="text-slate-600 dark:text-slate-400">
                                 Want to see all pricing details?{' '}
-                                <Link href="/pricing" className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400">
+                                <Link href="/pricing" className="font-semibold text-green-600 hover:text-green-700 dark:text-green-400">
                                     View pricing page
                                 </Link>
                             </p>
@@ -596,7 +531,7 @@ export default function Welcome({
                             <div className="mt-8">
                                 <Link
                                     href={register().url}
-                                    className="inline-block rounded-lg bg-blue-600 px-8 py-3 text-base font-medium text-white transition hover:bg-blue-700"
+                                    className="inline-block rounded-lg bg-green-600 px-8 py-3 text-base font-medium text-white transition hover:bg-green-700"
                                 >
                                     Start Free Trial
                                 </Link>

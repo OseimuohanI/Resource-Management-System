@@ -22,7 +22,7 @@ export default function ResourceManagementExample() {
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold">Resources</h1>
                 {canCreate && (
-                    <Button className="bg-blue-600 hover:bg-blue-700">
+                    <Button className="bg-green-600 hover:bg-green-700">
                         Create Resource
                     </Button>
                 )}
@@ -47,7 +47,7 @@ export default function ResourceManagementExample() {
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    className="text-blue-600"
+                                    className="text-green-600"
                                 >
                                     Edit
                                 </Button>

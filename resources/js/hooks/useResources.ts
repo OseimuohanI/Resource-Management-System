@@ -87,6 +87,7 @@ export function useResources(initialFilters?: ResourceFilters) {
         createResource,
         updateResource,
         deleteResource,
+        fetchResources,
         refetch,
     };
 }

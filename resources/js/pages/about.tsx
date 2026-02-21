@@ -108,7 +108,7 @@ export default function About() {
                                 const Icon = value.icon;
                                 return (
                                     <div key={index} className="animate-on-scroll rounded-lg border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900">
-                                        <Icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                                        <Icon className="h-8 w-8 text-green-600 dark:text-green-400" />
                                         <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">{value.title}</h3>
                                         <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{value.description}</p>
                                     </div>
@@ -125,11 +125,11 @@ export default function About() {
                         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                             {teamMembers.map((member, index) => (
                                 <div key={index} className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800">
-                                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg">
+                                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-600 text-white font-bold text-lg">
                                         {member.name.split(' ').map(n => n[0]).join('')}
                                     </div>
                                     <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">{member.name}</h3>
-                                    <p className="text-sm font-medium text-blue-600 dark:text-blue-400">{member.role}</p>
+                                    <p className="text-sm font-medium text-green-600 dark:text-green-400">{member.role}</p>
                                     <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">{member.description}</p>
                                 </div>
                             ))}
@@ -142,19 +142,19 @@ export default function About() {
                     <div className="mx-auto max-w-7xl">
                         <div className="grid gap-8 md:grid-cols-4">
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">500+</div>
+                                <div className="text-4xl font-bold text-green-600 dark:text-green-400">500+</div>
                                 <p className="mt-2 text-slate-600 dark:text-slate-400">Active Organizations</p>
                             </div>
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">10K+</div>
+                                <div className="text-4xl font-bold text-green-600 dark:text-green-400">10K+</div>
                                 <p className="mt-2 text-slate-600 dark:text-slate-400">Users Worldwide</p>
                             </div>
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">99.9%</div>
+                                <div className="text-4xl font-bold text-green-600 dark:text-green-400">99.9%</div>
                                 <p className="mt-2 text-slate-600 dark:text-slate-400">Uptime SLA</p>
                             </div>
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">24/7</div>
+                                <div className="text-4xl font-bold text-green-600 dark:text-green-400">24/7</div>
                                 <p className="mt-2 text-slate-600 dark:text-slate-400">Customer Support</p>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ export default function About() {
                         </p>
                         <Link
                             href="/pricing"
-                            className="mt-8 inline-block rounded-lg bg-blue-600 px-8 py-3 text-white transition hover:bg-blue-700"
+                            className="mt-8 inline-block rounded-lg bg-green-600 px-8 py-3 text-white transition hover:bg-green-700"
                         >
                             Get Started
                         </Link>
