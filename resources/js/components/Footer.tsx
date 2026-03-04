@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -12,11 +12,24 @@ export function Footer() {
                     <div>
                         <div className="flex items-center gap-2">
                             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6 text-white">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={2}
+                                    stroke="currentColor"
+                                    className="h-6 w-6 text-white"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                                    />
                                 </svg>
                             </div>
-                            <span className="text-lg font-bold text-slate-900 dark:text-white">ResourceMS</span>
+                            <span className="text-lg font-bold text-slate-900 dark:text-white">
+                                ResourceMS
+                            </span>
                         </div>
                         <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
                             Simple resource management for teams of all sizes.
@@ -25,25 +38,39 @@ export function Footer() {
 
                     {/* Product */}
                     <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-white">Product</h4>
+                        <h4 className="font-semibold text-slate-900 dark:text-white">
+                            Product
+                        </h4>
                         <ul className="mt-4 space-y-2">
                             <li>
-                                <Link href="/pricing" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/pricing"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Pricing
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/faq" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/faq"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     FAQ
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/features" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/features"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Features
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/security" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/security"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Security
                                 </Link>
                             </li>
@@ -52,25 +79,39 @@ export function Footer() {
 
                     {/* Company */}
                     <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-white">Company</h4>
+                        <h4 className="font-semibold text-slate-900 dark:text-white">
+                            Company
+                        </h4>
                         <ul className="mt-4 space-y-2">
                             <li>
-                                <Link href="/about" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/about"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     About
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/blog" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/blog"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Blog
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/careers" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/careers"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Careers
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/contact" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/contact"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Contact
                                 </Link>
                             </li>
@@ -79,25 +120,39 @@ export function Footer() {
 
                     {/* Legal */}
                     <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-white">Legal</h4>
+                        <h4 className="font-semibold text-slate-900 dark:text-white">
+                            Legal
+                        </h4>
                         <ul className="mt-4 space-y-2">
                             <li>
-                                <Link href="/privacy" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/privacy"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Privacy Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/terms" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/terms"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Terms of Service
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/cookies" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/cookies"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Cookie Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/sitemap" className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400">
+                                <Link
+                                    href="/sitemap"
+                                    className="text-sm text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                >
                                     Sitemap
                                 </Link>
                             </li>
@@ -146,7 +201,10 @@ export function Footer() {
                         </div>
                     </div>
                     <div className="text-sm text-slate-600 dark:text-slate-400">
-                        <a href="mailto:info@resourcems.com" className="hover:text-green-600 dark:hover:text-green-400">
+                        <a
+                            href="mailto:info@resourcems.com"
+                            className="hover:text-green-600 dark:hover:text-green-400"
+                        >
                             info@resourcems.com
                         </a>
                     </div>

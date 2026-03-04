@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
-import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
+import AppLayout from '@/layouts/app-layout';
 import { api, handleApiError } from '@/lib/api';
-import { type SharedData } from '@/types';
+import { type BreadcrumbItem, type SharedData } from '@/types';
+import { Head, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 interface CompanyUser {
     id: number;
@@ -71,7 +70,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Team() {
     const { auth } = usePage<SharedData>().props;
-    const canManageTeam = auth.user.role === 'admin' || auth.user.role === 'manager';
+    const canManageTeam =
+        auth.user.role === 'admin' || auth.user.role === 'manager';
 
     const [users, setUsers] = useState<CompanyUser[]>([]);
     const [loading, setLoading] = useState(false);
@@ -101,9 +101,17 @@ export default function Team() {
 
             setUsers(data.users || []);
             setPlan(typeof data.plan === 'string' ? data.plan : null);
-            setUserLimit(typeof data.user_limit === 'number' ? data.user_limit : null);
-            setUsedSeats(typeof data.used_seats === 'number' ? data.used_seats : null);
-            setRemainingSeats(typeof data.remaining_seats === 'number' ? data.remaining_seats : null);
+            setUserLimit(
+                typeof data.user_limit === 'number' ? data.user_limit : null,
+            );
+            setUsedSeats(
+                typeof data.used_seats === 'number' ? data.used_seats : null,
+            );
+            setRemainingSeats(
+                typeof data.remaining_seats === 'number'
+                    ? data.remaining_seats
+                    : null,
+            );
             setIsUnlimitedSeats(Boolean(data.is_unlimited_seats));
         } catch (err) {
             setError(handleApiError(err));
@@ -114,9 +122,11 @@ export default function Team() {
         fetchUsers();
     }, [showTrashed]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    ) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
             [name]: value,
         }));
@@ -165,8 +175,13 @@ export default function Team() {
     };
 
     const handleForceDeleteUser = async (userId: number) => {
-        if (!confirm('This will permanently delete the user. This action cannot be undone.')) return;
-        
+        if (
+            !confirm(
+                'This will permanently delete the user. This action cannot be undone.',
+            )
+        )
+            return;
+
         setLoading(true);
         try {
             await api.delete(`/company/users/${userId}/force`);
@@ -207,9 +222,12 @@ export default function Team() {
             <div className="space-y-6 p-6">
                 <div className="flex items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Team</h1>
+                        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+                            Team
+                        </h1>
                         <p className="mt-1 text-slate-600 dark:text-slate-400">
-                            Manage users in your company based on your subscription plan
+                            Manage users in your company based on your
+                            subscription plan
                         </p>
                     </div>
                     {plan && (
@@ -220,14 +238,17 @@ export default function Team() {
                             >
                                 Plan: {formatPlanName(plan)}
                             </Badge>
-                            {!isUnlimitedSeats && userLimit !== null && usedSeats !== null && (
-                                <p className="text-xs text-slate-600 dark:text-slate-400">
-                                    {usedSeats} of {userLimit} seats used
-                                    {remainingSeats !== null && remainingSeats >= 0
-                                        ? ` (${remainingSeats} remaining)`
-                                        : ''}
-                                </p>
-                            )}
+                            {!isUnlimitedSeats &&
+                                userLimit !== null &&
+                                usedSeats !== null && (
+                                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                                        {usedSeats} of {userLimit} seats used
+                                        {remainingSeats !== null &&
+                                        remainingSeats >= 0
+                                            ? ` (${remainingSeats} remaining)`
+                                            : ''}
+                                    </p>
+                                )}
                             {isUnlimitedSeats && usedSeats !== null && (
                                 <p className="text-xs text-slate-600 dark:text-slate-400">
                                     {usedSeats} seats used on an unlimited plan
@@ -239,9 +260,15 @@ export default function Team() {
                         <Button
                             variant="outline"
                             onClick={() => setShowTrashed(!showTrashed)}
-                            className={showTrashed ? "bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100 dark:bg-amber-900/20 dark:border-amber-700 dark:text-amber-200" : ""}
+                            className={
+                                showTrashed
+                                    ? 'border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-900/20 dark:text-amber-200'
+                                    : ''
+                            }
                         >
-                            {showTrashed ? 'Show Active Users' : 'Show Trashed Users'}
+                            {showTrashed
+                                ? 'Show Active Users'
+                                : 'Show Trashed Users'}
                         </Button>
                     )}
                 </div>
@@ -290,7 +317,9 @@ export default function Team() {
                                 </div>
                                 <div className="grid gap-4 md:grid-cols-2">
                                     <div>
-                                        <Label htmlFor="password">Password</Label>
+                                        <Label htmlFor="password">
+                                            Password
+                                        </Label>
                                         <Input
                                             id="password"
                                             name="password"
@@ -301,12 +330,16 @@ export default function Team() {
                                         />
                                     </div>
                                     <div>
-                                        <Label htmlFor="password_confirmation">Confirm password</Label>
+                                        <Label htmlFor="password_confirmation">
+                                            Confirm password
+                                        </Label>
                                         <Input
                                             id="password_confirmation"
                                             name="password_confirmation"
                                             type="password"
-                                            value={formData.password_confirmation}
+                                            value={
+                                                formData.password_confirmation
+                                            }
                                             onChange={handleChange}
                                             required
                                         />
@@ -320,7 +353,7 @@ export default function Team() {
                                         value={formData.role}
                                         onChange={handleChange}
                                         title="Role"
-                                        className="flex h-9 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                                        className="flex h-9 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
                                     >
                                         <option value="user">User</option>
                                         <option value="manager">Manager</option>
@@ -337,7 +370,9 @@ export default function Team() {
                         </div>
                     )}
 
-                    <div className={`rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 ${!canManageTeam ? 'md:col-span-2' : ''}`}>
+                    <div
+                        className={`rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 ${!canManageTeam ? 'md:col-span-2' : ''}`}
+                    >
                         <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
                             Current team members
                         </h2>
@@ -381,9 +416,13 @@ export default function Team() {
                                                 <td className="px-4 py-3 text-sm">
                                                     <Badge
                                                         variant="outline"
-                                                        className={getRoleBadgeClasses(user.role)}
+                                                        className={getRoleBadgeClasses(
+                                                            user.role,
+                                                        )}
                                                     >
-                                                        {formatRoleLabel(user.role)}
+                                                        {formatRoleLabel(
+                                                            user.role,
+                                                        )}
                                                     </Badge>
                                                 </td>
                                                 {canManageTeam && (
@@ -393,7 +432,11 @@ export default function Team() {
                                                                 <Button
                                                                     variant="outline"
                                                                     size="sm"
-                                                                    onClick={() => handleRestoreUser(user.id)}
+                                                                    onClick={() =>
+                                                                        handleRestoreUser(
+                                                                            user.id,
+                                                                        )
+                                                                    }
                                                                     className="h-8 px-2 text-xs"
                                                                 >
                                                                     Restore
@@ -401,18 +444,29 @@ export default function Team() {
                                                                 <Button
                                                                     variant="destructive"
                                                                     size="sm"
-                                                                    onClick={() => handleForceDeleteUser(user.id)}
+                                                                    onClick={() =>
+                                                                        handleForceDeleteUser(
+                                                                            user.id,
+                                                                        )
+                                                                    }
                                                                     className="h-8 px-2 text-xs"
                                                                 >
-                                                                    Delete Forever
+                                                                    Delete
+                                                                    Forever
                                                                 </Button>
                                                             </div>
                                                         ) : (
-                                                            user.id !== auth.user.id && (
+                                                            user.id !==
+                                                                auth.user
+                                                                    .id && (
                                                                 <Button
                                                                     variant="destructive"
                                                                     size="sm"
-                                                                    onClick={() => handleDeleteUser(user.id)}
+                                                                    onClick={() =>
+                                                                        handleDeleteUser(
+                                                                            user.id,
+                                                                        )
+                                                                    }
                                                                     className="h-8 px-2 text-xs"
                                                                 >
                                                                     Remove

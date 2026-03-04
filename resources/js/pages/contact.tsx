@@ -1,8 +1,8 @@
-import { Head } from '@inertiajs/react';
 import { Footer } from '@/components/Footer';
-import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
-import { FormEvent, useState } from 'react';
 import { PublicHeader } from '@/components/PublicHeader';
+import { Head } from '@inertiajs/react';
+import { Mail, MapPin, MessageSquare, Phone } from 'lucide-react';
+import { FormEvent, useState } from 'react';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -14,9 +14,11 @@ export default function Contact() {
     });
     const [submitted, setSubmitted] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = (e: FormEvent) => {
@@ -24,7 +26,13 @@ export default function Contact() {
         // In a real application, this would send the form to a backend
         setSubmitted(true);
         setTimeout(() => {
-            setFormData({ name: '', email: '', company: '', subject: '', message: '' });
+            setFormData({
+                name: '',
+                email: '',
+                company: '',
+                subject: '',
+                message: '',
+            });
             setSubmitted(false);
         }, 3000);
     };
@@ -81,11 +89,12 @@ export default function Contact() {
                 {/* Hero */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-3xl text-center">
-                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl">
+                        <h1 className="text-4xl font-bold text-slate-900 sm:text-5xl dark:text-white">
                             Get in Touch
                         </h1>
                         <p className="mt-6 text-lg text-slate-600 dark:text-slate-400">
-                            Have questions? Our team is here to help. Contact us using any of the methods below.
+                            Have questions? Our team is here to help. Contact us
+                            using any of the methods below.
                         </p>
                     </div>
                 </section>
@@ -100,12 +109,18 @@ export default function Contact() {
                                     <a
                                         key={index}
                                         href={method.href}
-                                        className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-6 hover:border-green-300 hover:shadow-md transition dark:border-slate-700 dark:bg-slate-800 dark:hover:border-green-600"
+                                        className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-6 transition hover:border-green-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:border-green-600"
                                     >
                                         <Icon className="h-8 w-8 text-green-600 dark:text-green-400" />
-                                        <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">{method.title}</h3>
-                                        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{method.description}</p>
-                                        <p className="mt-3 font-medium text-green-600 dark:text-green-400">{method.contact}</p>
+                                        <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">
+                                            {method.title}
+                                        </h3>
+                                        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                                            {method.description}
+                                        </p>
+                                        <p className="mt-3 font-medium text-green-600 dark:text-green-400">
+                                            {method.contact}
+                                        </p>
                                     </a>
                                 );
                             })}
@@ -117,17 +132,24 @@ export default function Contact() {
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl">
                         <div className="rounded-lg border border-slate-200 bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
-                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Send us a Message</h2>
-                            
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                                Send us a Message
+                            </h2>
+
                             {submitted && (
                                 <div className="mt-4 rounded-lg bg-green-50 p-4 dark:bg-green-900/20">
                                     <p className="text-sm text-green-800 dark:text-green-300">
-                                        Thank you! We've received your message and will get back to you within 24 hours.
+                                        Thank you! We've received your message
+                                        and will get back to you within 24
+                                        hours.
                                     </p>
                                 </div>
                             )}
 
-                            <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="mt-8 space-y-6"
+                            >
                                 <div className="grid gap-6 md:grid-cols-2">
                                     <div>
                                         <label className="block text-sm font-medium text-slate-900 dark:text-white">
@@ -139,7 +161,7 @@ export default function Contact() {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                             placeholder="Your name"
                                         />
                                     </div>
@@ -153,7 +175,7 @@ export default function Contact() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                            className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                             placeholder="your@email.com"
                                         />
                                     </div>
@@ -168,7 +190,7 @@ export default function Contact() {
                                         name="company"
                                         value={formData.company}
                                         onChange={handleChange}
-                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                         placeholder="Your company"
                                     />
                                 </div>
@@ -183,7 +205,7 @@ export default function Contact() {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                         placeholder="How can we help?"
                                     />
                                 </div>
@@ -198,7 +220,7 @@ export default function Contact() {
                                         onChange={handleChange}
                                         required
                                         rows={5}
-                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
+                                        className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400"
                                         placeholder="Tell us more..."
                                     />
                                 </div>

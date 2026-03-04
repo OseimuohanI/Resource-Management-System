@@ -5,7 +5,10 @@ interface PricingSelectionProps {
     onSelectPlan: (plan: string) => void;
 }
 
-export default function PricingSelection({ selectedPlan, onSelectPlan }: PricingSelectionProps) {
+export default function PricingSelection({
+    selectedPlan,
+    onSelectPlan,
+}: PricingSelectionProps) {
     const plans = [
         {
             id: 'free',
@@ -13,7 +16,12 @@ export default function PricingSelection({ selectedPlan, onSelectPlan }: Pricing
             description: 'Perfect for getting started',
             price: '$0',
             period: 'Forever free',
-            features: ['Up to 50 resources', 'Single user account', 'Basic resource tracking', 'Email support'],
+            features: [
+                'Up to 50 resources',
+                'Single user account',
+                'Basic resource tracking',
+                'Email support',
+            ],
         },
         {
             id: 'professional',
@@ -21,7 +29,13 @@ export default function PricingSelection({ selectedPlan, onSelectPlan }: Pricing
             description: 'For growing teams',
             price: '$29',
             period: '/month',
-            features: ['Up to 500 resources', 'Up to 5 team members', 'Advanced resource tracking', 'API access', 'Priority support'],
+            features: [
+                'Up to 500 resources',
+                'Up to 5 team members',
+                'Advanced resource tracking',
+                'API access',
+                'Priority support',
+            ],
             highlighted: true,
         },
         {
@@ -30,7 +44,13 @@ export default function PricingSelection({ selectedPlan, onSelectPlan }: Pricing
             description: 'For large organizations',
             price: 'Custom',
             period: 'Contact sales',
-            features: ['Unlimited resources', 'Unlimited team members', 'Advanced features', '24/7 support', 'Dedicated manager'],
+            features: [
+                'Unlimited resources',
+                'Unlimited team members',
+                'Advanced features',
+                '24/7 support',
+                'Dedicated manager',
+            ],
         },
     ];
 
@@ -59,14 +79,20 @@ export default function PricingSelection({ selectedPlan, onSelectPlan }: Pricing
                         {plan.highlighted && (
                             <div className="mb-4 flex items-center gap-2">
                                 <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                                <span className="text-sm font-medium text-green-600 dark:text-green-400">Most Popular</span>
+                                <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                                    Most Popular
+                                </span>
                             </div>
                         )}
 
                         <div className="flex items-start justify-between">
                             <div>
-                                <h3 className="font-bold text-slate-900 dark:text-white">{plan.name}</h3>
-                                <p className="text-sm text-slate-600 dark:text-slate-400">{plan.description}</p>
+                                <h3 className="font-bold text-slate-900 dark:text-white">
+                                    {plan.name}
+                                </h3>
+                                <p className="text-sm text-slate-600 dark:text-slate-400">
+                                    {plan.description}
+                                </p>
                             </div>
                             {selectedPlan === plan.id && (
                                 <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
@@ -74,14 +100,22 @@ export default function PricingSelection({ selectedPlan, onSelectPlan }: Pricing
                         </div>
 
                         <div className="my-4">
-                            <span className="text-2xl font-bold text-slate-900 dark:text-white">{plan.price}</span>
-                            <span className="text-sm text-slate-600 dark:text-slate-400"> {plan.period}</span>
+                            <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                                {plan.price}
+                            </span>
+                            <span className="text-sm text-slate-600 dark:text-slate-400">
+                                {' '}
+                                {plan.period}
+                            </span>
                         </div>
 
                         <ul className="space-y-2">
                             {plan.features.map((feature) => (
-                                <li key={feature} className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
-                                    <CheckCircle className="h-4 w-4 flex-shrink-0 text-green-600 dark:text-green-400 mt-0.5" />
+                                <li
+                                    key={feature}
+                                    className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300"
+                                >
+                                    <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-600 dark:text-green-400" />
                                     {feature}
                                 </li>
                             ))}

@@ -1,6 +1,6 @@
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { useResources } from '@/hooks/useResources';
-import { Button } from '@/components/ui/button';
 
 export default function ResourceManagementExample() {
     const { user, canCreate, canEdit, canDelete } = useAuth();
@@ -39,7 +39,8 @@ export default function ResourceManagementExample() {
                                 {resource.name}
                             </h3>
                             <p className="text-sm text-slate-600 dark:text-slate-400">
-                                Type: {resource.type} | Status: {resource.status} | Qty: {resource.quantity}
+                                Type: {resource.type} | Status:{' '}
+                                {resource.status} | Qty: {resource.quantity}
                             </p>
                         </div>
                         <div className="flex gap-2">

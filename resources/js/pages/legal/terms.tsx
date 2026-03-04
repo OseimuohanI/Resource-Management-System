@@ -1,6 +1,6 @@
-import { Head } from '@inertiajs/react';
 import { Footer } from '@/components/Footer';
 import { PublicHeader } from '@/components/PublicHeader';
+import { Head } from '@inertiajs/react';
 
 export default function Terms() {
     const lastUpdated = 'January 14, 2026';
@@ -16,7 +16,7 @@ export default function Terms() {
         {
             title: 'Use License',
             content: [
-                'Permission is granted to temporarily download one copy of the materials (information or software) on ResourceMS\'s Service for personal, non-commercial transitory viewing only.',
+                "Permission is granted to temporarily download one copy of the materials (information or software) on ResourceMS's Service for personal, non-commercial transitory viewing only.",
                 'This is the grant of a license, not a transfer of title, and under this license you may not:',
                 '• Modifying or copying the materials',
                 '• Using the materials for any commercial purpose or for any public display',
@@ -28,7 +28,7 @@ export default function Terms() {
         {
             title: 'Disclaimer',
             content: [
-                'The materials on ResourceMS\'s Service are provided on an \'as is\' basis. ResourceMS makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.',
+                "The materials on ResourceMS's Service are provided on an 'as is' basis. ResourceMS makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.",
                 'Further, ResourceMS does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Service relating to such materials or on any sites linked to this Service.',
             ],
         },
@@ -41,14 +41,14 @@ export default function Terms() {
         {
             title: 'Accuracy of Materials',
             content: [
-                'The materials appearing on ResourceMS\'s Service could include technical, typographical, or photographic errors. ResourceMS does not warrant that any of the materials on the Service are accurate, complete, or current.',
+                "The materials appearing on ResourceMS's Service could include technical, typographical, or photographic errors. ResourceMS does not warrant that any of the materials on the Service are accurate, complete, or current.",
                 'ResourceMS may make changes to the materials contained on the Service at any time without notice. However, ResourceMS does not commit to updating the materials.',
             ],
         },
         {
             title: 'Links',
             content: [
-                'ResourceMS has not reviewed all of the sites linked to its Service and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by ResourceMS of the site. Use of any such linked website is at the user\'s own risk.',
+                "ResourceMS has not reviewed all of the sites linked to its Service and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by ResourceMS of the site. Use of any such linked website is at the user's own risk.",
             ],
         },
         {
@@ -74,22 +74,30 @@ export default function Terms() {
                 {/* Content */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-3xl">
-                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Terms of Service</h1>
-                        <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">Last updated: {lastUpdated}</p>
+                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+                            Terms of Service
+                        </h1>
+                        <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
+                            Last updated: {lastUpdated}
+                        </p>
 
                         <div className="mt-12 space-y-12">
                             {sections.map((section, index) => (
                                 <div key={index}>
-                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{section.title}</h2>
+                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                                        {section.title}
+                                    </h2>
                                     <div className="mt-4 space-y-3">
-                                        {section.content.map((paragraph, pIndex) => (
-                                            <p
-                                                key={pIndex}
-                                                className="text-slate-600 dark:text-slate-400 leading-relaxed"
-                                            >
-                                                {paragraph}
-                                            </p>
-                                        ))}
+                                        {section.content.map(
+                                            (paragraph, pIndex) => (
+                                                <p
+                                                    key={pIndex}
+                                                    className="leading-relaxed text-slate-600 dark:text-slate-400"
+                                                >
+                                                    {paragraph}
+                                                </p>
+                                            ),
+                                        )}
                                     </div>
                                 </div>
                             ))}

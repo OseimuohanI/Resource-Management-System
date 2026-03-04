@@ -1,8 +1,8 @@
-import { ChevronDown } from 'lucide-react';
-import { Head } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
 import { Footer } from '@/components/Footer';
 import { PublicHeader } from '@/components/PublicHeader';
+import { Head } from '@inertiajs/react';
+import { ChevronDown } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const faqCategories = [
     {
@@ -18,7 +18,7 @@ const faqCategories = [
             },
             {
                 question: 'Do I need a credit card to start the free trial?',
-                answer: 'Yes, we require a credit card to start the trial, but we won\'t charge you until the trial period ends. You can cancel anytime before the trial ends with no charges.',
+                answer: "Yes, we require a credit card to start the trial, but we won't charge you until the trial period ends. You can cancel anytime before the trial ends with no charges.",
             },
             {
                 question: 'Can I use the free plan indefinitely?',
@@ -31,7 +31,7 @@ const faqCategories = [
         items: [
             {
                 question: 'Can I change my plan anytime?',
-                answer: 'Yes, you can upgrade or downgrade your plan at any time. If you upgrade, you\'ll be charged the difference immediately. If you downgrade, the change takes effect at the end of your current billing cycle.',
+                answer: "Yes, you can upgrade or downgrade your plan at any time. If you upgrade, you'll be charged the difference immediately. If you downgrade, the change takes effect at the end of your current billing cycle.",
             },
             {
                 question: 'What payment methods do you accept?',
@@ -47,7 +47,7 @@ const faqCategories = [
             },
             {
                 question: 'Do you offer refunds?',
-                answer: 'We offer a 14-day money-back guarantee on all plans. If you\'re not satisfied, contact our support team for a full refund.',
+                answer: "We offer a 14-day money-back guarantee on all plans. If you're not satisfied, contact our support team for a full refund.",
             },
             {
                 question: 'Can I cancel my subscription?',
@@ -59,7 +59,7 @@ const faqCategories = [
         title: 'Features & Usage',
         items: [
             {
-                question: 'What\'s the difference between the plans?',
+                question: "What's the difference between the plans?",
                 answer: 'The Free plan includes up to 50 resources and basic tracking. Professional adds up to 500 resources, team collaboration, analytics, and API access. Enterprise offers unlimited resources, advanced features, and dedicated support.',
             },
             {
@@ -101,7 +101,7 @@ const faqCategories = [
             },
             {
                 question: 'Can I change my email address?',
-                answer: 'Yes, you can update your email address in account settings. You\'ll need to verify the new email address before the change takes effect.',
+                answer: "Yes, you can update your email address in account settings. You'll need to verify the new email address before the change takes effect.",
             },
         ],
     },
@@ -137,7 +137,9 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex w-full items-center justify-between py-6 text-left transition-colors hover:text-green-600 dark:hover:text-green-400"
             >
-                <span className="font-semibold text-slate-900 dark:text-white">{question}</span>
+                <span className="font-semibold text-slate-900 dark:text-white">
+                    {question}
+                </span>
                 <ChevronDown
                     className={`h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
                         isOpen ? 'rotate-180' : ''
@@ -146,11 +148,15 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
             </button>
             <div
                 className={`grid transition-all duration-300 ease-in-out ${
-                    isOpen ? 'grid-rows-[1fr] opacity-100 mb-6' : 'grid-rows-[0fr] opacity-0'
+                    isOpen
+                        ? 'mb-6 grid-rows-[1fr] opacity-100'
+                        : 'grid-rows-[0fr] opacity-0'
                 }`}
             >
                 <div className="overflow-hidden">
-                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{answer}</p>
+                    <p className="leading-relaxed text-slate-600 dark:text-slate-400">
+                        {answer}
+                    </p>
                 </div>
             </div>
         </div>
@@ -161,19 +167,20 @@ export default function FAQ() {
     useEffect(() => {
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -100px 0px',
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in');
                 }
             });
         }, observerOptions);
 
-        const animatedElements = document.querySelectorAll('.animate-on-scroll');
-        animatedElements.forEach(el => observer.observe(el));
+        const animatedElements =
+            document.querySelectorAll('.animate-on-scroll');
+        animatedElements.forEach((el) => observer.observe(el));
 
         return () => observer.disconnect();
     }, []);
@@ -213,12 +220,13 @@ export default function FAQ() {
 
                 {/* Hero */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
-                    <div className="mx-auto max-w-3xl text-center animate-on-scroll">
-                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl">
+                    <div className="animate-on-scroll mx-auto max-w-3xl text-center">
+                        <h1 className="text-4xl font-bold text-slate-900 sm:text-5xl dark:text-white">
                             Frequently Asked Questions
                         </h1>
                         <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
-                            Find answers to common questions about ResourceMS, pricing, features, and support.
+                            Find answers to common questions about ResourceMS,
+                            pricing, features, and support.
                         </p>
                     </div>
                 </section>
@@ -227,7 +235,10 @@ export default function FAQ() {
                 <section className="px-4 py-12 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-3xl">
                         {faqCategories.map((category, categoryIndex) => (
-                            <div key={category.title} className="animate-on-scroll mb-12">
+                            <div
+                                key={category.title}
+                                className="animate-on-scroll mb-12"
+                            >
                                 <h2 className="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
                                     {category.title}
                                 </h2>
@@ -252,7 +263,8 @@ export default function FAQ() {
                             Still have questions?
                         </h2>
                         <p className="mt-4 text-slate-600 dark:text-slate-400">
-                            Can't find the answer you're looking for? Please contact our support team.
+                            Can't find the answer you're looking for? Please
+                            contact our support team.
                         </p>
                         <a
                             href="mailto:info@resourcems.com"

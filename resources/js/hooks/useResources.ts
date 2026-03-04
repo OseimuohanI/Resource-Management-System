@@ -1,6 +1,11 @@
-import { useState, useEffect } from 'react';
-import { resourceApi, handleApiError } from '@/lib/api';
-import type { Resource, CreateResourceData, UpdateResourceData, ResourceFilters } from '@/types/resource';
+import { handleApiError, resourceApi } from '@/lib/api';
+import type {
+    CreateResourceData,
+    Resource,
+    ResourceFilters,
+    UpdateResourceData,
+} from '@/types/resource';
+import { useEffect, useState } from 'react';
 
 export function useResources(initialFilters?: ResourceFilters) {
     const [resources, setResources] = useState<Resource[]>([]);
@@ -24,7 +29,7 @@ export function useResources(initialFilters?: ResourceFilters) {
 
     useEffect(() => {
         fetchResources();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const createResource = async (data: CreateResourceData) => {
@@ -32,7 +37,7 @@ export function useResources(initialFilters?: ResourceFilters) {
         setError(null);
         try {
             const newResource = await resourceApi.create(data);
-            setResources(prev => [...prev, newResource]);
+            setResources((prev) => [...prev, newResource]);
             return newResource;
         } catch (err) {
             const errorMsg = handleApiError(err);
@@ -48,10 +53,10 @@ export function useResources(initialFilters?: ResourceFilters) {
         setError(null);
         try {
             const updatedResource = await resourceApi.update(id, data);
-            setResources(prev =>
-                prev.map(resource =>
-                    resource.id === id ? updatedResource : resource
-                )
+            setResources((prev) =>
+                prev.map((resource) =>
+                    resource.id === id ? updatedResource : resource,
+                ),
             );
             return updatedResource;
         } catch (err) {
@@ -68,7 +73,9 @@ export function useResources(initialFilters?: ResourceFilters) {
         setError(null);
         try {
             await resourceApi.delete(id);
-            setResources(prev => prev.filter(resource => resource.id !== id));
+            setResources((prev) =>
+                prev.filter((resource) => resource.id !== id),
+            );
         } catch (err) {
             const errorMsg = handleApiError(err);
             setError(errorMsg);

@@ -23,15 +23,15 @@ export const PRICING_PLANS: PricingPlan[] = [
         cta: {
             text: 'Get Started',
             href: 'register',
-            type: 'route'
+            type: 'route',
         },
         features: [
             'Up to 50 resources',
             'Single user account',
             'Basic resource tracking',
             'Email support',
-            '7-day history retention'
-        ]
+            '7-day history retention',
+        ],
     },
     {
         name: 'Professional',
@@ -43,7 +43,7 @@ export const PRICING_PLANS: PricingPlan[] = [
         cta: {
             text: 'Start 14-Day Trial',
             href: 'register',
-            type: 'route'
+            type: 'route',
         },
         features: [
             'Up to 500 resources',
@@ -53,8 +53,8 @@ export const PRICING_PLANS: PricingPlan[] = [
             '1-year history retention',
             'Priority email support',
             'API access',
-            'Custom resource fields'
-        ]
+            'Custom resource fields',
+        ],
     },
     {
         name: 'Enterprise',
@@ -65,7 +65,7 @@ export const PRICING_PLANS: PricingPlan[] = [
         cta: {
             text: 'Contact Sales',
             href: 'mailto:info@resourcems.com',
-            type: 'external'
+            type: 'external',
         },
         features: [
             'Unlimited resources',
@@ -79,7 +79,7 @@ export const PRICING_PLANS: PricingPlan[] = [
             'Role-based permissions',
             'Audit logging',
             'Custom integrations',
-            'Dedicated account manager'
-        ]
-    }
+            'Dedicated account manager',
+        ],
+    },
 ];

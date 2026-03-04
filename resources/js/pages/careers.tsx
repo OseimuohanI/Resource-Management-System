@@ -1,7 +1,7 @@
-import { Head } from '@inertiajs/react';
 import { Footer } from '@/components/Footer';
-import { MapPin, Briefcase, Users } from 'lucide-react';
 import { PublicHeader } from '@/components/PublicHeader';
+import { Head } from '@inertiajs/react';
+import { Briefcase, MapPin, Users } from 'lucide-react';
 
 export default function Careers() {
     const openPositions = [
@@ -12,7 +12,8 @@ export default function Careers() {
             location: 'San Francisco, CA',
             type: 'Full-time',
             experience: 'Senior (5+ years)',
-            description: 'Lead the development of our core platform. Work with React, Laravel, and modern web technologies.',
+            description:
+                'Lead the development of our core platform. Work with React, Laravel, and modern web technologies.',
         },
         {
             id: 2,
@@ -21,7 +22,8 @@ export default function Careers() {
             location: 'San Francisco, CA',
             type: 'Full-time',
             experience: 'Mid-level (3-5 years)',
-            description: 'Shape the future of ResourceMS by leading product strategy and roadmap.',
+            description:
+                'Shape the future of ResourceMS by leading product strategy and roadmap.',
         },
         {
             id: 3,
@@ -30,7 +32,8 @@ export default function Careers() {
             location: 'Remote',
             type: 'Full-time',
             experience: 'Mid-level (2-4 years)',
-            description: 'Help our customers succeed and achieve their goals with ResourceMS.',
+            description:
+                'Help our customers succeed and achieve their goals with ResourceMS.',
         },
         {
             id: 4,
@@ -39,7 +42,8 @@ export default function Careers() {
             location: 'San Francisco, CA',
             type: 'Full-time',
             experience: 'Mid-level (3-5 years)',
-            description: 'Build and maintain our cloud infrastructure. Experience with AWS, Docker, and Kubernetes required.',
+            description:
+                'Build and maintain our cloud infrastructure. Experience with AWS, Docker, and Kubernetes required.',
         },
         {
             id: 5,
@@ -48,7 +52,8 @@ export default function Careers() {
             location: 'Remote',
             type: 'Full-time',
             experience: 'Mid-level (3-5 years)',
-            description: 'Design beautiful and intuitive user interfaces. Portfolio required.',
+            description:
+                'Design beautiful and intuitive user interfaces. Portfolio required.',
         },
         {
             id: 6,
@@ -57,17 +62,42 @@ export default function Careers() {
             location: 'Remote',
             type: 'Full-time',
             experience: 'Entry-level',
-            description: 'Generate new business opportunities and build relationships with prospects.',
+            description:
+                'Generate new business opportunities and build relationships with prospects.',
         },
     ];
 
     const benefits = [
-        { icon: '💰', title: 'Competitive Salary', description: 'Industry-competitive compensation packages' },
-        { icon: '🏥', title: 'Health Insurance', description: 'Comprehensive health, dental, and vision coverage' },
-        { icon: '🏠', title: 'Remote Work', description: 'Flexible work arrangements and remote options' },
-        { icon: '📚', title: 'Learning Budget', description: '$2,000 annual learning and development budget' },
-        { icon: '⏱️', title: 'Flexible Hours', description: 'Flexible work hours and PTO policy' },
-        { icon: '🎯', title: 'Equity', description: 'Stock options for all full-time employees' },
+        {
+            icon: '💰',
+            title: 'Competitive Salary',
+            description: 'Industry-competitive compensation packages',
+        },
+        {
+            icon: '🏥',
+            title: 'Health Insurance',
+            description: 'Comprehensive health, dental, and vision coverage',
+        },
+        {
+            icon: '🏠',
+            title: 'Remote Work',
+            description: 'Flexible work arrangements and remote options',
+        },
+        {
+            icon: '📚',
+            title: 'Learning Budget',
+            description: '$2,000 annual learning and development budget',
+        },
+        {
+            icon: '⏱️',
+            title: 'Flexible Hours',
+            description: 'Flexible work hours and PTO policy',
+        },
+        {
+            icon: '🎯',
+            title: 'Equity',
+            description: 'Stock options for all full-time employees',
+        },
     ];
 
     return (
@@ -91,25 +121,38 @@ export default function Careers() {
                 {/* Hero */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-3xl text-center">
-                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl">
+                        <h1 className="text-4xl font-bold text-slate-900 sm:text-5xl dark:text-white">
                             Join Our Team
                         </h1>
                         <p className="mt-6 text-lg text-slate-600 dark:text-slate-400">
-                            Help us revolutionize resource management. We're looking for talented people who are passionate about solving real problems.
+                            Help us revolutionize resource management. We're
+                            looking for talented people who are passionate about
+                            solving real problems.
                         </p>
                     </div>
                 </section>
 
                 {/* Why Join */}
-                <section className="border-t border-slate-200 bg-white px-4 py-20 dark:border-slate-700 dark:bg-slate-800 sm:px-6 lg:px-8">
+                <section className="border-t border-slate-200 bg-white px-4 py-20 sm:px-6 lg:px-8 dark:border-slate-700 dark:bg-slate-800">
                     <div className="mx-auto max-w-7xl">
-                        <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">Why Join ResourceMS?</h2>
+                        <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
+                            Why Join ResourceMS?
+                        </h2>
                         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                             {benefits.map((benefit) => (
-                                <div key={benefit.title} className="animate-on-scroll rounded-lg border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900">
-                                    <div className="text-3xl">{benefit.icon}</div>
-                                    <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">{benefit.title}</h3>
-                                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{benefit.description}</p>
+                                <div
+                                    key={benefit.title}
+                                    className="animate-on-scroll rounded-lg border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900"
+                                >
+                                    <div className="text-3xl">
+                                        {benefit.icon}
+                                    </div>
+                                    <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">
+                                        {benefit.title}
+                                    </h3>
+                                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                                        {benefit.description}
+                                    </p>
                                 </div>
                             ))}
                         </div>
@@ -119,16 +162,19 @@ export default function Careers() {
                 {/* Open Positions */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-4xl">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Open Positions</h2>
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+                            Open Positions
+                        </h2>
                         <p className="mt-3 text-slate-600 dark:text-slate-400">
-                            We're always looking for talented individuals to join our team. Check out our current openings below.
+                            We're always looking for talented individuals to
+                            join our team. Check out our current openings below.
                         </p>
 
                         <div className="mt-8 space-y-4">
                             {openPositions.map((position) => (
                                 <div
                                     key={position.id}
-                                    className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-6 hover:shadow-md transition dark:border-slate-700 dark:bg-slate-800"
+                                    className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-6 transition hover:shadow-md dark:border-slate-700 dark:bg-slate-800"
                                 >
                                     <div className="flex items-start justify-between">
                                         <div className="flex-1">
@@ -156,7 +202,7 @@ export default function Careers() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button className="ml-4 rounded-lg bg-green-600 px-6 py-2 text-white hover:bg-green-700 transition whitespace-nowrap">
+                                        <button className="ml-4 rounded-lg bg-green-600 px-6 py-2 whitespace-nowrap text-white transition hover:bg-green-700">
                                             Apply Now
                                         </button>
                                     </div>
@@ -167,17 +213,18 @@ export default function Careers() {
                 </section>
 
                 {/* CTA */}
-                <section className="border-t border-slate-200 bg-white px-4 py-20 dark:border-slate-700 dark:bg-slate-800 sm:px-6 lg:px-8">
+                <section className="border-t border-slate-200 bg-white px-4 py-20 sm:px-6 lg:px-8 dark:border-slate-700 dark:bg-slate-800">
                     <div className="mx-auto max-w-3xl rounded-lg border border-slate-200 bg-slate-50 p-12 text-center dark:border-slate-700 dark:bg-slate-900">
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                             Don't see your role?
                         </h2>
                         <p className="mt-4 text-slate-600 dark:text-slate-400">
-                            Send us your resume and let us know how you could contribute to ResourceMS.
+                            Send us your resume and let us know how you could
+                            contribute to ResourceMS.
                         </p>
                         <a
                             href="mailto:careers@resourcems.com"
-                            className="mt-6 inline-block rounded-lg bg-green-600 px-8 py-3 text-white hover:bg-green-700 transition"
+                            className="mt-6 inline-block rounded-lg bg-green-600 px-8 py-3 text-white transition hover:bg-green-700"
                         >
                             Send Resume
                         </a>

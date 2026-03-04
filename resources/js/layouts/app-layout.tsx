@@ -1,9 +1,9 @@
-import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
-import { type BreadcrumbItem } from '@/types';
-import { type ReactNode, useEffect } from 'react';
-import { usePage } from '@inertiajs/react';
-import { setAuthToken } from '@/lib/api';
 import { animationStyles } from '@/components/AnimatedSection';
+import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
+import { setAuthToken } from '@/lib/api';
+import { type BreadcrumbItem } from '@/types';
+import { usePage } from '@inertiajs/react';
+import { type ReactNode, useEffect } from 'react';
 
 interface AppLayoutProps {
     children: ReactNode;
@@ -11,7 +11,10 @@ interface AppLayoutProps {
 }
 
 export default ({ children, breadcrumbs, ...props }: AppLayoutProps) => {
-    const pageProps = usePage().props as { sanctum_token?: string, auth?: { user?: { remember_token?: string } } };
+    const pageProps = usePage().props as {
+        sanctum_token?: string;
+        auth?: { user?: { remember_token?: string } };
+    };
     const sanctum_token = pageProps.sanctum_token;
     const remember_token = pageProps.auth?.user?.remember_token;
 
@@ -22,7 +25,7 @@ export default ({ children, breadcrumbs, ...props }: AppLayoutProps) => {
             setAuthToken(remember_token);
         }
     }, [sanctum_token, remember_token]);
-    
+
     return (
         <>
             <style>{animationStyles}</style>

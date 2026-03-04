@@ -1,7 +1,6 @@
-import { Link } from '@inertiajs/react';
-import { Head } from '@inertiajs/react';
 import { Footer } from '@/components/Footer';
 import { PublicHeader } from '@/components/PublicHeader';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Sitemap() {
     const sections = [
@@ -51,9 +50,12 @@ export default function Sitemap() {
                 {/* Content */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-4xl">
-                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Sitemap</h1>
+                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+                            Sitemap
+                        </h1>
                         <p className="mt-4 text-slate-600 dark:text-slate-400">
-                            Browse all pages and sections available on ResourceMS.
+                            Browse all pages and sections available on
+                            ResourceMS.
                         </p>
 
                         <div className="mt-12 grid gap-12 md:grid-cols-2">
@@ -63,16 +65,18 @@ export default function Sitemap() {
                                         {section.title}
                                     </h2>
                                     <ul className="mt-4 space-y-2">
-                                        {section.links.map((link, linkIndex) => (
-                                            <li key={linkIndex}>
-                                                <Link
-                                                    href={link.href}
-                                                    className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400 transition"
-                                                >
-                                                    {link.label}
-                                                </Link>
-                                            </li>
-                                        ))}
+                                        {section.links.map(
+                                            (link, linkIndex) => (
+                                                <li key={linkIndex}>
+                                                    <Link
+                                                        href={link.href}
+                                                        className="text-slate-600 transition hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
+                                                    >
+                                                        {link.label}
+                                                    </Link>
+                                                </li>
+                                            ),
+                                        )}
                                     </ul>
                                 </div>
                             ))}
@@ -83,11 +87,12 @@ export default function Sitemap() {
                                 XML Sitemap
                             </h2>
                             <p className="mt-3 text-slate-600 dark:text-slate-400">
-                                Search engines use our XML sitemap to discover and index all pages on our website.
+                                Search engines use our XML sitemap to discover
+                                and index all pages on our website.
                             </p>
                             <a
                                 href="/sitemap.xml"
-                                className="mt-4 inline-block text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium"
+                                className="mt-4 inline-block font-medium text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
                             >
                                 View XML Sitemap →
                             </a>

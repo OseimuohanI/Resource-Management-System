@@ -6,17 +6,21 @@ interface AnimatedSectionProps {
     delay?: number;
 }
 
-export function AnimatedSection({ children, className = '', delay = 0 }: AnimatedSectionProps) {
+export function AnimatedSection({
+    children,
+    className = '',
+    delay = 0,
+}: AnimatedSectionProps) {
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -50px 0px',
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('animate-in');
@@ -44,7 +48,7 @@ export const animationStyles = `
     .animate-on-scroll {
         opacity: 0;
         transform: translateY(30px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     .animate-on-scroll.animate-in {
@@ -53,7 +57,7 @@ export const animationStyles = `
     }
 
     .fade-in-up {
-        animation: fadeInUp 0.8s ease-out forwards;
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes fadeInUp {

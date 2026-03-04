@@ -4,12 +4,12 @@ import { Form, Head } from '@inertiajs/react';
 import { useState } from 'react';
 
 import InputError from '@/components/input-error';
+import PricingSelection from '@/components/PricingSelection';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-import PricingSelection from '@/components/PricingSelection';
 import AuthLayout from '@/layouts/auth-layout';
 
 export default function Register() {
@@ -49,7 +49,9 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="company_name">Company name</Label>
+                                <Label htmlFor="company_name">
+                                    Company name
+                                </Label>
                                 <Input
                                     id="company_name"
                                     type="text"
@@ -108,7 +110,11 @@ export default function Register() {
                             </div>
 
                             {/* Hidden input for plan */}
-                            <input type="hidden" name="plan" value={selectedPlan} />
+                            <input
+                                type="hidden"
+                                name="plan"
+                                value={selectedPlan}
+                            />
 
                             {/* Pricing Selection */}
                             <div className="my-4">
@@ -133,7 +139,11 @@ export default function Register() {
 
                         <div className="text-center text-sm text-slate-600 dark:text-slate-400">
                             Already have an account?{' '}
-                            <TextLink href={login()} tabIndex={7} className="font-medium text-green-600 hover:text-green-700">
+                            <TextLink
+                                href={login()}
+                                tabIndex={7}
+                                className="font-medium text-green-600 hover:text-green-700"
+                            >
                                 Log in
                             </TextLink>
                         </div>

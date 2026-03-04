@@ -1,11 +1,11 @@
-import axios from 'axios';
 import type {
-    Resource,
-    CreateResourceData,
-    UpdateResourceData,
-    ResourceFilters,
     ApiResponse,
+    CreateResourceData,
+    Resource,
+    ResourceFilters,
+    UpdateResourceData,
 } from '@/types/resource';
+import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -29,7 +29,9 @@ if (token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
-const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute('content');
 if (csrfToken) {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 }
@@ -48,14 +50,14 @@ export const resourceApi = {
         }
 
         const response = await axios.get<ApiResponse<Resource[]>>(
-            `${API_BASE}/resources?${params.toString()}`
+            `${API_BASE}/resources?${params.toString()}`,
         );
         return response.data.data || [];
     },
 
     async getById(id: number): Promise<Resource> {
         const response = await axios.get<ApiResponse<Resource>>(
-            `${API_BASE}/resources/${id}`
+            `${API_BASE}/resources/${id}`,
         );
         if (!response.data.data) {
             throw new Error('Resource not found');
@@ -66,10 +68,12 @@ export const resourceApi = {
     async create(data: CreateResourceData): Promise<Resource> {
         const response = await axios.post<ApiResponse<Resource>>(
             `${API_BASE}/resources`,
-            data
+            data,
         );
         if (!response.data.data) {
-            throw new Error(response.data.message || 'Failed to create resource');
+            throw new Error(
+                response.data.message || 'Failed to create resource',
+            );
         }
         return response.data.data;
     },
@@ -77,10 +81,12 @@ export const resourceApi = {
     async update(id: number, data: UpdateResourceData): Promise<Resource> {
         const response = await axios.put<ApiResponse<Resource>>(
             `${API_BASE}/resources/${id}`,
-            data
+            data,
         );
         if (!response.data.data) {
-            throw new Error(response.data.message || 'Failed to update resource');
+            throw new Error(
+                response.data.message || 'Failed to update resource',
+            );
         }
         return response.data.data;
     },

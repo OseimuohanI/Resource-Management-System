@@ -1,14 +1,25 @@
-import { Head } from '@inertiajs/react';
 import { Footer } from '@/components/Footer';
-import { Calendar, User, ChevronRight, BarChart3, Rocket, FileText, Recycle, Target, Globe } from 'lucide-react';
 import { PublicHeader } from '@/components/PublicHeader';
+import { Head } from '@inertiajs/react';
+import {
+    BarChart3,
+    Calendar,
+    ChevronRight,
+    FileText,
+    Globe,
+    Recycle,
+    Rocket,
+    Target,
+    User,
+} from 'lucide-react';
 
 export default function Blog() {
     const blogPosts = [
         {
             id: 1,
             title: '10 Best Practices for Resource Management',
-            excerpt: 'Learn the proven strategies that top organizations use to optimize their resource allocation and reduce waste.',
+            excerpt:
+                'Learn the proven strategies that top organizations use to optimize their resource allocation and reduce waste.',
             author: 'Sarah Chen',
             date: 'January 10, 2026',
             category: 'Best Practices',
@@ -17,7 +28,8 @@ export default function Blog() {
         {
             id: 2,
             title: 'How to Reduce Resource Waste by 40%',
-            excerpt: 'Discover actionable techniques to minimize resource waste and improve your bottom line significantly.',
+            excerpt:
+                'Discover actionable techniques to minimize resource waste and improve your bottom line significantly.',
             author: 'James Wilson',
             date: 'January 8, 2026',
             category: 'Optimization',
@@ -26,7 +38,8 @@ export default function Blog() {
         {
             id: 3,
             title: 'The Future of Resource Management',
-            excerpt: 'Explore upcoming trends and technologies that will reshape how organizations manage their resources.',
+            excerpt:
+                'Explore upcoming trends and technologies that will reshape how organizations manage their resources.',
             author: 'Emily Rodriguez',
             date: 'January 5, 2026',
             category: 'Trends',
@@ -35,7 +48,8 @@ export default function Blog() {
         {
             id: 4,
             title: 'Case Study: 50% Efficiency Gain in 3 Months',
-            excerpt: 'See how a Fortune 500 company achieved remarkable results with their resource management strategy.',
+            excerpt:
+                'See how a Fortune 500 company achieved remarkable results with their resource management strategy.',
             author: 'Michael Brown',
             date: 'December 28, 2025',
             category: 'Case Studies',
@@ -44,7 +58,8 @@ export default function Blog() {
         {
             id: 5,
             title: 'Resource Allocation Strategies for Remote Teams',
-            excerpt: 'Best practices for managing resources across distributed teams and time zones effectively.',
+            excerpt:
+                'Best practices for managing resources across distributed teams and time zones effectively.',
             author: 'Lisa Anderson',
             date: 'December 20, 2025',
             category: 'Remote Work',
@@ -53,7 +68,8 @@ export default function Blog() {
         {
             id: 6,
             title: 'Integrating ResourceMS with Your Workflow',
-            excerpt: 'A comprehensive guide to setting up and integrating ResourceMS into your existing systems.',
+            excerpt:
+                'A comprehensive guide to setting up and integrating ResourceMS into your existing systems.',
             author: 'David Lee',
             date: 'December 15, 2025',
             category: 'Tutorials',
@@ -101,11 +117,12 @@ export default function Blog() {
                 {/* Hero */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-3xl text-center">
-                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl">
+                        <h1 className="text-4xl font-bold text-slate-900 sm:text-5xl dark:text-white">
                             ResourceMS Blog
                         </h1>
                         <p className="mt-6 text-lg text-slate-600 dark:text-slate-400">
-                            Insights, tips, and best practices for optimizing your resource management.
+                            Insights, tips, and best practices for optimizing
+                            your resource management.
                         </p>
                     </div>
                 </section>
@@ -117,23 +134,29 @@ export default function Blog() {
                             {blogPosts.map((post) => (
                                 <article
                                     key={post.id}
-                                    className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-8 hover:shadow-lg transition dark:border-slate-700 dark:bg-slate-800"
+                                    className="animate-on-scroll rounded-lg border border-slate-200 bg-white p-8 transition hover:shadow-lg dark:border-slate-700 dark:bg-slate-800"
                                 >
                                     <div className="flex items-start gap-6">
                                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900">
                                             {(() => {
-                                                const Icon = categoryIcon(post.category);
-                                                return <Icon className="h-6 w-6 text-green-600 dark:text-green-300" />;
+                                                const Icon = categoryIcon(
+                                                    post.category,
+                                                );
+                                                return (
+                                                    <Icon className="h-6 w-6 text-green-600 dark:text-green-300" />
+                                                );
                                             })()}
                                         </div>
                                         <div className="flex-1">
-                                            <div className="flex items-center gap-6 mb-3">
+                                            <div className="mb-3 flex items-center gap-6">
                                                 <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700 dark:bg-green-900 dark:text-green-200">
                                                     {post.category}
                                                 </span>
-                                                <span className="text-sm text-slate-500 dark:text-slate-400">{post.readTime}</span>
+                                                <span className="text-sm text-slate-500 dark:text-slate-400">
+                                                    {post.readTime}
+                                                </span>
                                             </div>
-                                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white hover:text-green-600 dark:hover:text-green-400 transition">
+                                            <h2 className="text-2xl font-bold text-slate-900 transition hover:text-green-600 dark:text-white dark:hover:text-green-400">
                                                 {post.title}
                                             </h2>
                                             <p className="mt-3 text-slate-600 dark:text-slate-400">
@@ -149,7 +172,7 @@ export default function Blog() {
                                                     {post.date}
                                                 </div>
                                             </div>
-                                            <button className="mt-6 inline-flex items-center gap-2 text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium transition">
+                                            <button className="mt-6 inline-flex items-center gap-2 font-medium text-green-600 transition hover:text-green-700 dark:text-green-400 dark:hover:text-green-300">
                                                 Read More
                                                 <ChevronRight className="h-4 w-4" />
                                             </button>
@@ -178,23 +201,24 @@ export default function Blog() {
                 </section>
 
                 {/* Newsletter */}
-                <section className="border-t border-slate-200 bg-white px-4 py-20 dark:border-slate-700 dark:bg-slate-800 sm:px-6 lg:px-8">
+                <section className="border-t border-slate-200 bg-white px-4 py-20 sm:px-6 lg:px-8 dark:border-slate-700 dark:bg-slate-800">
                     <div className="mx-auto max-w-2xl rounded-lg border border-slate-200 bg-slate-50 p-8 text-center dark:border-slate-700 dark:bg-slate-900">
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                             Subscribe to Our Newsletter
                         </h2>
                         <p className="mt-3 text-slate-600 dark:text-slate-400">
-                            Get the latest tips, insights, and best practices delivered to your inbox.
+                            Get the latest tips, insights, and best practices
+                            delivered to your inbox.
                         </p>
                         <form className="mt-6 flex flex-col gap-3 sm:flex-row">
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder-slate-400"
+                                className="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder-slate-400"
                             />
                             <button
                                 type="submit"
-                                className="rounded-lg bg-green-600 px-6 py-2 font-medium text-white hover:bg-green-700 transition"
+                                className="rounded-lg bg-green-600 px-6 py-2 font-medium text-white transition hover:bg-green-700"
                             >
                                 Subscribe
                             </button>

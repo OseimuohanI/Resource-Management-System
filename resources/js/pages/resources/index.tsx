@@ -1,15 +1,19 @@
-import { useState, useEffect } from 'react';
-import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useResources } from '@/hooks/useResources';
 import { useAuth } from '@/hooks/useAuth';
-import type { Resource, CreateResourceData, UpdateResourceData } from '@/types/resource';
+import { useResources } from '@/hooks/useResources';
+import AppLayout from '@/layouts/app-layout';
 import { api } from '@/lib/api';
+import { type BreadcrumbItem } from '@/types';
+import type {
+    CreateResourceData,
+    Resource,
+    UpdateResourceData,
+} from '@/types/resource';
+import { Head } from '@inertiajs/react';
 import { Search } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -19,9 +23,17 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Resources() {
-    const { resources, loading, error, createResource, updateResource, deleteResource, fetchResources } = useResources();
+    const {
+        resources,
+        loading,
+        error,
+        createResource,
+        updateResource,
+        deleteResource,
+        fetchResources,
+    } = useResources();
     const { canEdit, canDelete } = useAuth();
-    
+
     const [showForm, setShowForm] = useState(false);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [formError, setFormError] = useState<string | null>(null);
@@ -34,8 +46,14 @@ export default function Resources() {
         quantity: 0,
     });
 
-    const [checkInModal, setCheckInModal] = useState<{ isOpen: boolean; resourceId: number | null }>({ isOpen: false, resourceId: null });
-    const [checkOutModal, setCheckOutModal] = useState<{ isOpen: boolean; resourceId: number | null }>({ isOpen: false, resourceId: null });
+    const [checkInModal, setCheckInModal] = useState<{
+        isOpen: boolean;
+        resourceId: number | null;
+    }>({ isOpen: false, resourceId: null });
+    const [checkOutModal, setCheckOutModal] = useState<{
+        isOpen: boolean;
+        resourceId: number | null;
+    }>({ isOpen: false, resourceId: null });
     const [usageNotes, setUsageNotes] = useState('');
 
     // Debounced search effect
@@ -63,7 +81,9 @@ export default function Resources() {
     const handleCheckOut = async () => {
         if (!checkOutModal.resourceId) return;
         try {
-            await api.post(`/resources/${checkOutModal.resourceId}/checkout`, { notes: usageNotes });
+            await api.post(`/resources/${checkOutModal.resourceId}/checkout`, {
+                notes: usageNotes,
+            });
             setSuccessMessage('Resource checked out successfully');
             setCheckOutModal({ isOpen: false, resourceId: null });
             setUsageNotes('');
@@ -74,9 +94,11 @@ export default function Resources() {
         }
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    ) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
             [name]: name === 'quantity' ? Number(value) : value,
         }));
@@ -95,14 +117,21 @@ export default function Resources() {
                 await createResource(formData as CreateResourceData);
                 setSuccessMessage('Resource created successfully!');
             }
-            
+
             setShowForm(false);
             setEditingId(null);
-            setFormData({ name: '', type: '', status: 'Available', quantity: 0 });
-            
+            setFormData({
+                name: '',
+                type: '',
+                status: 'Available',
+                quantity: 0,
+            });
+
             setTimeout(() => setSuccessMessage(null), 3000);
         } catch (err) {
-            setFormError(err instanceof Error ? err.message : 'Failed to save resource');
+            setFormError(
+                err instanceof Error ? err.message : 'Failed to save resource',
+            );
         }
     };
 
@@ -119,13 +148,17 @@ export default function Resources() {
 
     const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this resource?')) return;
-        
+
         try {
             await deleteResource(id);
             setSuccessMessage('Resource deleted successfully!');
             setTimeout(() => setSuccessMessage(null), 3000);
         } catch (err) {
-            setFormError(err instanceof Error ? err.message : 'Failed to delete resource');
+            setFormError(
+                err instanceof Error
+                    ? err.message
+                    : 'Failed to delete resource',
+            );
         }
     };
 
@@ -142,8 +175,12 @@ export default function Resources() {
             <div className="space-y-6 p-6">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Resources</h1>
-                        <p className="mt-1 text-slate-600 dark:text-slate-400">Manage your organizational resources</p>
+                        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+                            Resources
+                        </h1>
+                        <p className="mt-1 text-slate-600 dark:text-slate-400">
+                            Manage your organizational resources
+                        </p>
                     </div>
                     {canEdit && (
                         <Button
@@ -157,7 +194,7 @@ export default function Resources() {
 
                 {/* Search Bar */}
                 <div className="relative">
-                    <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+                    <Search className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-slate-400" />
                     <Input
                         type="text"
                         placeholder="Search resources..."
@@ -176,9 +213,11 @@ export default function Resources() {
                 {showForm && (
                     <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
                         <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
-                            {editingId ? 'Edit Resource' : 'Create New Resource'}
+                            {editingId
+                                ? 'Edit Resource'
+                                : 'Create New Resource'}
                         </h2>
-                        
+
                         {formError && (
                             <div className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">
                                 {formError}
@@ -212,11 +251,24 @@ export default function Resources() {
 
                                 <div>
                                     <Label htmlFor="status">Status</Label>
-                                    <select title='status' id="status" name="status" value={formData.status} onChange={handleChange} className="flex h-9 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
-                                        <option value="Available">Available</option>
+                                    <select
+                                        title="status"
+                                        id="status"
+                                        name="status"
+                                        value={formData.status}
+                                        onChange={handleChange}
+                                        className="flex h-9 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                                    >
+                                        <option value="Available">
+                                            Available
+                                        </option>
                                         <option value="In Use">In Use</option>
-                                        <option value="Maintenance">Maintenance</option>
-                                        <option value="Reserved">Reserved</option>
+                                        <option value="Maintenance">
+                                            Maintenance
+                                        </option>
+                                        <option value="Reserved">
+                                            Reserved
+                                        </option>
                                     </select>
                                 </div>
 
@@ -239,7 +291,11 @@ export default function Resources() {
                                     disabled={loading}
                                     className="bg-green-600 hover:bg-green-700"
                                 >
-                                    {loading ? 'Saving...' : editingId ? 'Update Resource' : 'Create Resource'}
+                                    {loading
+                                        ? 'Saving...'
+                                        : editingId
+                                          ? 'Update Resource'
+                                          : 'Create Resource'}
                                 </Button>
                                 <Button
                                     type="button"
@@ -260,12 +316,16 @@ export default function Resources() {
                 )}
 
                 {loading && !showForm && (
-                    <div className="text-center text-slate-600 dark:text-slate-400">Loading resources...</div>
+                    <div className="text-center text-slate-600 dark:text-slate-400">
+                        Loading resources...
+                    </div>
                 )}
 
                 {!loading && resources.length === 0 && (
                     <div className="rounded-xl border border-slate-200 bg-white p-12 text-center dark:border-slate-700 dark:bg-slate-800">
-                        <p className="text-slate-600 dark:text-slate-400">No resources found. Create one to get started.</p>
+                        <p className="text-slate-600 dark:text-slate-400">
+                            No resources found. Create one to get started.
+                        </p>
                     </div>
                 )}
 
@@ -274,50 +334,93 @@ export default function Resources() {
                         <table className="w-full">
                             <thead>
                                 <tr className="border-b border-slate-200 dark:border-slate-700">
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Name</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Type</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Status</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Quantity</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Actions</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                                        Name
+                                    </th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                                        Type
+                                    </th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                                        Status
+                                    </th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                                        Quantity
+                                    </th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {resources.map((resource) => (
-                                    <tr key={resource.id} className="border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50">
-                                        <td className="px-6 py-4 text-sm text-slate-900 dark:text-white">{resource.name}</td>
-                                        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{resource.type || 'N/A'}</td>
+                                    <tr
+                                        key={resource.id}
+                                        className="border-b border-slate-100 hover:bg-slate-50 dark:border-slate-700/50 dark:hover:bg-slate-700/50"
+                                    >
+                                        <td className="px-6 py-4 text-sm text-slate-900 dark:text-white">
+                                            {resource.name}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                            {resource.type || 'N/A'}
+                                        </td>
                                         <td className="px-6 py-4">
-                                            <span className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
-                                                resource.status === 'Available' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
-                                                resource.status === 'In Use' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300' :
-                                                resource.status === 'Maintenance' ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' :
-                                                'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300'
-                                            }`}>
+                                            <span
+                                                className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
+                                                    resource.status ===
+                                                    'Available'
+                                                        ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                                                        : resource.status ===
+                                                            'In Use'
+                                                          ? 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300'
+                                                          : resource.status ===
+                                                              'Maintenance'
+                                                            ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+                                                            : 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300'
+                                                }`}
+                                            >
                                                 {resource.status || 'N/A'}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{resource.quantity || 0}</td>
+                                        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                            {resource.quantity || 0}
+                                        </td>
                                         <td className="px-6 py-4">
                                             <div className="flex gap-2">
                                                 {canEdit && (
                                                     <Button
-                                                        onClick={() => handleEdit(resource)}
+                                                        onClick={() =>
+                                                            handleEdit(resource)
+                                                        }
                                                         className="bg-green-600 px-3 py-1 text-xs hover:bg-green-700"
                                                     >
                                                         Edit
                                                     </Button>
                                                 )}
-                                                {resource.status === 'Available' && (
+                                                {resource.status ===
+                                                    'Available' && (
                                                     <Button
-                                                        onClick={() => setCheckOutModal({ isOpen: true, resourceId: resource.id })}
+                                                        onClick={() =>
+                                                            setCheckOutModal({
+                                                                isOpen: true,
+                                                                resourceId:
+                                                                    resource.id,
+                                                            })
+                                                        }
                                                         className="bg-blue-600 px-3 py-1 text-xs hover:bg-blue-700"
                                                     >
                                                         Check Out
                                                     </Button>
                                                 )}
-                                                {resource.status === 'In Use' && (
+                                                {resource.status ===
+                                                    'In Use' && (
                                                     <Button
-                                                        onClick={() => setCheckInModal({ isOpen: true, resourceId: resource.id })}
+                                                        onClick={() =>
+                                                            setCheckInModal({
+                                                                isOpen: true,
+                                                                resourceId:
+                                                                    resource.id,
+                                                            })
+                                                        }
                                                         className="bg-orange-600 px-3 py-1 text-xs hover:bg-orange-700"
                                                     >
                                                         Check In
@@ -325,7 +428,11 @@ export default function Resources() {
                                                 )}
                                                 {canDelete && (
                                                     <Button
-                                                        onClick={() => handleDelete(resource.id)}
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                resource.id,
+                                                            )
+                                                        }
                                                         className="bg-red-600 px-3 py-1 text-xs hover:bg-red-700"
                                                     >
                                                         Delete

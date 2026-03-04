@@ -1,6 +1,6 @@
-import { Head } from '@inertiajs/react';
 import { Footer } from '@/components/Footer';
 import { PublicHeader } from '@/components/PublicHeader';
+import { Head } from '@inertiajs/react';
 
 export default function Cookies() {
     const lastUpdated = 'January 14, 2026';
@@ -69,22 +69,30 @@ export default function Cookies() {
                 {/* Content */}
                 <section className="px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-3xl">
-                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Cookie Policy</h1>
-                        <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">Last updated: {lastUpdated}</p>
+                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+                            Cookie Policy
+                        </h1>
+                        <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
+                            Last updated: {lastUpdated}
+                        </p>
 
                         <div className="mt-12 space-y-12">
                             {sections.map((section, index) => (
                                 <div key={index}>
-                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{section.title}</h2>
+                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                                        {section.title}
+                                    </h2>
                                     <div className="mt-4 space-y-3">
-                                        {section.content.map((paragraph, pIndex) => (
-                                            <p
-                                                key={pIndex}
-                                                className="text-slate-600 dark:text-slate-400 leading-relaxed"
-                                            >
-                                                {paragraph}
-                                            </p>
-                                        ))}
+                                        {section.content.map(
+                                            (paragraph, pIndex) => (
+                                                <p
+                                                    key={pIndex}
+                                                    className="leading-relaxed text-slate-600 dark:text-slate-400"
+                                                >
+                                                    {paragraph}
+                                                </p>
+                                            ),
+                                        )}
                                     </div>
                                 </div>
                             ))}

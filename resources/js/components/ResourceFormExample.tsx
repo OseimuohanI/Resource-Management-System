@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useResources } from '@/hooks/useResources';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useResources } from '@/hooks/useResources';
+import { useState } from 'react';
 
 export default function ResourceFormExample() {
     const { createResource, loading, error } = useResources();
@@ -17,7 +17,7 @@ export default function ResourceFormExample() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSuccess(false);
-        
+
         try {
             await createResource(formData);
             setSuccess(true);
@@ -35,7 +35,7 @@ export default function ResourceFormExample() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
             [name]: name === 'quantity' ? Number(value) : value,
         }));
