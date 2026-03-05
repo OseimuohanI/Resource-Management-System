@@ -5,7 +5,7 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="border-t border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
+        <footer className="relative z-20 border-t border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8 md:grid-cols-4">
                     {/* Brand */}
@@ -178,21 +178,27 @@ export function Footer() {
                                 <Mail className="h-5 w-5" />
                             </a>
                             <a
-                                href="#twitter"
+                                href="https://x.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
                                 aria-label="Twitter"
                             >
                                 <Twitter className="h-5 w-5" />
                             </a>
                             <a
-                                href="#github"
+                                href="https://github.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
                                 aria-label="GitHub"
                             >
                                 <Github className="h-5 w-5" />
                             </a>
                             <a
-                                href="#linkedin"
+                                href="https://www.linkedin.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-slate-600 hover:text-green-600 dark:text-slate-400 dark:hover:text-green-400"
                                 aria-label="LinkedIn"
                             >
