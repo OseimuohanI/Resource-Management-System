@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -26,12 +27,6 @@ class AuthController extends Controller
             ]);
 
             $token = $user->createToken('myapptoken')->plainTextToken;
-
-            // store token on the user record and in session for Inertia frontend
-            $user->remember_token = $token;
-            $user->save();
-
-            $request->session()->put('sanctum_token', $token);
 
             $response = [
                 'user' => $user,
@@ -66,12 +61,6 @@ class AuthController extends Controller
 
             $token = $user->createToken('myapptoken')->plainTextToken;
 
-            // store token on the user record and in session for Inertia frontend
-            $user->remember_token = $token;
-            $user->save();
-
-            $request->session()->put('sanctum_token', $token);
-
             $response = [
                 'user' => $user,
                 'token' => $token
@@ -88,9 +77,6 @@ class AuthController extends Controller
 
     public function logout(Request $request) {
         $request->user()->tokens()->delete();
-
-        // clear sanctum token from session
-        $request->session()->forget('sanctum_token');
 
         return [
             'message' => 'Logged Out'
@@ -187,5 +173,37 @@ class AuthController extends Controller
         return response()->json([
             'user' => $newUser,
         ], 201);
+    }
+
+    public function webLogin(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        $remember = $request->boolean('remember', false);
+
+        if (!Auth::attempt($credentials, $remember)) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Bad Credential',
+                ], 401);
+            }
+
+            return back()
+                ->withErrors(['email' => 'The provided credentials are incorrect.'])
+                ->onlyInput('email');
+        }
+
+        $request->session()->regenerate();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'user' => $request->user(),
+            ]);
+        }
+
+        return redirect()->intended(route('dashboard'));
     }
 }

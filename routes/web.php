@@ -61,6 +61,8 @@ Route::get('sitemap', function () {
     return Inertia::render('sitemap');
 })->name('sitemap');
 
+Route::post('session/login', [AuthController::class, 'webLogin'])->name('session.login');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('resources', function () {
