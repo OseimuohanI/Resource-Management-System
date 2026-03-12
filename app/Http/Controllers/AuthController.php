@@ -10,66 +10,80 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function register(Request $request) {
-        $fields = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed',
-            'role' => 'required|string'
-        ]);
+        try {
+            $fields = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|string|unique:users,email',
+                'password' => 'required|string|confirmed',
+                'role' => 'required|string'
+            ]);
 
-        $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password']),
-            'role' => $fields['role'],
-        ]);
+            $user = User::create([
+                'name' => $fields['name'],
+                'email' => $fields['email'],
+                'password' => bcrypt($fields['password']),
+                'role' => $fields['role'],
+            ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+            $token = $user->createToken('myapptoken')->plainTextToken;
 
-        // store token on the user record and in session for Inertia frontend
-        $user->remember_token = $token;
-        $user->save();
+            // store token on the user record and in session for Inertia frontend
+            $user->remember_token = $token;
+            $user->save();
 
-        $request->session()->put('sanctum_token', $token);
+            $request->session()->put('sanctum_token', $token);
 
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
 
-        return response($response, 201);
+            return response($response, 201);
+        } catch (\Exception $e) {
+            return response([
+                'message' => 'Registration failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function login(Request $request) {
-        $fields = $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string'
-        ]);
+        try {
+            $fields = $request->validate([
+                'email' => 'required|string',
+                'password' => 'required|string'
+            ]);
 
-        //Check email
-        $user = User::where('email', $fields['email'])->first();
+            //Check email
+            $user = User::where('email', $fields['email'])->first();
 
-        //Check Password
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
+            //Check Password
+            if (!$user || !Hash::check($fields['password'], $user->password)) {
+                return response([
+                    'message' => 'Bad Credential'
+                ], 401);
+            }
+
+            $token = $user->createToken('myapptoken')->plainTextToken;
+
+            // store token on the user record and in session for Inertia frontend
+            $user->remember_token = $token;
+            $user->save();
+
+            $request->session()->put('sanctum_token', $token);
+
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+
+            return response($response, 201);
+        } catch (\Exception $e) {
             return response([
-                'message' => 'Bad Credential'
-            ], 401);
+                'message' => 'Login failed',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        // store token on the user record and in session for Inertia frontend
-        $user->remember_token = $token;
-        $user->save();
-
-        $request->session()->put('sanctum_token', $token);
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response($response, 201);
     }
 
     public function logout(Request $request) {
