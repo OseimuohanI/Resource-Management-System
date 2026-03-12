@@ -1,22 +1,11 @@
 import '../css/app.css';
 
-import { createInertiaApp } from '@inertiajs/react';
-import { usePage } from '@inertiajs/react';
+import { createInertiaApp, router } from '@inertiajs/react';
+import WebGLBackground from '@/components/webgl/WebGLBackground';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { StrictMode } from 'react';
-import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
-
-function ScrollToTopOnNavigate() {
-    const { url } = usePage();
-
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    }, [url]);
-
-    return null;
-}
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -30,9 +19,13 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
 
+        router.on('navigate', () => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        });
+
         root.render(
             <StrictMode>
-                <ScrollToTopOnNavigate />
+                <WebGLBackground />
                 <App {...props} />
             </StrictMode>,
         );

@@ -1,7 +1,6 @@
 import { TiltCard } from '@/components/dom/TiltCard';
 import { Footer } from '@/components/Footer';
 import { PricingCard } from '@/components/PricingCard';
-import WebGLBackground from '@/components/webgl/WebGLBackground';
 import { PRICING_PLANS } from '@/config/pricing';
 import { dashboard, login, register } from '@/routes';
 import { type SharedData } from '@/types';
@@ -81,7 +80,6 @@ export default function Welcome({
                 .stagger-4 { animation-delay: 0.4s; }
             `}</style>
             <div className="relative z-0 min-h-screen bg-transparent">
-                <WebGLBackground />
                 {/* Header */}
                 <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/80">
                     <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">

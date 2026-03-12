@@ -1,6 +1,5 @@
 import { animationStyles } from '@/components/AnimatedSection';
 import { TiltCard } from '@/components/dom/TiltCard';
-import WebGLBackground from '@/components/webgl/WebGLBackground';
 import { home } from '@/routes';
 import { Link } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
@@ -20,7 +19,6 @@ export default function AuthSimpleLayout({
         <>
             <style>{animationStyles}</style>
             <div className="relative z-0 flex min-h-screen bg-transparent">
-                <WebGLBackground />
                 {/* Left Side - Branding */}
                 <div className="hidden w-1/2 bg-green-600 p-12 lg:flex lg:flex-col lg:justify-between">
                     <Link
